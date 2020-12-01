@@ -10,7 +10,6 @@ dotenv.config();
 // Comment
 // Making connection to the database
 const database = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-    port: process.env.DB_PORT,
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
     operatorAliases: false
@@ -19,12 +18,8 @@ const database = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pro
 // Comment
 // Testting connection
 database.authenticate()
-    .then(() => console.log('Connection Ok'))
-    .catch(err => {
-        error: {
-            message: err
-        }
-    });
+    .then(() => console.log('The Connection to the database is Ok !!!'))
+    .catch(err => console.log(err));
 
 // Comment
 // Exporting module
