@@ -2,6 +2,12 @@
 // Importing dependencies
 import express from 'express';
 import bodyparser from 'body-parser';
+import dotenv from 'dotenv';
+
+// Comment
+// Config dotenv for environment variables
+dotenv.config();
+
 
 // Comment
 // Variables declaration
