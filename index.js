@@ -3,7 +3,6 @@
 import express from 'express';
 import bodyparser from 'body-parser';
 import dotenv from 'dotenv';
-import database from './config/database';
 import allRouters from './routers/routers_index';
 
 // Comment
@@ -27,8 +26,18 @@ app.get('/', (req, res) => {
     });
 });
 
+// Comment
+// Testing connection to the database
+const testDbConnection = async () => {
+    try {
+        database.authenticate();
+        console.log('The connection to the database is Ok !!!');
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-
+testDbConnection();
 // Comment
 // Listening to the port
 const port = process.env.port || 3000;
