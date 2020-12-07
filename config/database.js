@@ -16,11 +16,5 @@ const database = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pro
 });
 
 // Comment
-// Testting connection
-database.authenticate()
-    .then(() => console.log('The Connection to the database is Ok !!!'))
-    .catch(err => console.log(err));
-
-// Comment
 // Exporting module
 export default database;
