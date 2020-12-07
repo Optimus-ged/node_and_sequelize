@@ -2,6 +2,8 @@
 // Import dependencies
 import Product from '../models/products';
 
+// Comment
+// The product controller
 const productController = {
     // Comment
     // Get-all products controller

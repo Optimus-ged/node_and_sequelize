@@ -4,6 +4,7 @@ import express from 'express';
 import bodyparser from 'body-parser';
 import dotenv from 'dotenv';
 import allRouters from './routers/routers_index';
+import database from './config/database';
 
 // Comment
 // Config dotenv for environment variables
