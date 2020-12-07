@@ -11,6 +11,7 @@ const router = express.Router();
 // All product routers
 router
     .get('/', productCtrl.getProducts)
+    .get('/:id', productCtrl.getOneProduit)
     .post('/', productCtrl.addProduct);
 
 export default router;
