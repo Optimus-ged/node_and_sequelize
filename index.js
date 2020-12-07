@@ -19,11 +19,11 @@ const app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use('/api', allRouters);
-
-app.get('/', (req, res) => {
-    res.status(200).json({
-        status: 200,
-        message: 'Welcome to my Api'
+app.use('**', (req, res, next) => {
+    res.status(401).json({
+        error: {
+            message: 'The Request was not found on the server'
+        }
     });
 });
 
