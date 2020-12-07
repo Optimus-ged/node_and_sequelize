@@ -17,7 +17,31 @@ const productController = {
             });
         });
         res.status(200).json({
+            status : 200,
             products: response
+        });
+    },
+
+    // Comment
+    // Get product by id
+    getOneProduit = async (req, res) => {
+        let id = parseInt(req.params.id);
+        let response = await Product.findOne({
+            where : id
+        })
+        .then().catch(err => {
+            console.error(err);
+        });
+        if(response){
+            return res.status(200).json({
+                status : 200,
+                product : response
+            });
+        }
+        res.status(401).json({
+            error :{
+                message : 'product not found'
+            }
         });
     },
 
