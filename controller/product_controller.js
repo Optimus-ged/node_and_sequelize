@@ -72,4 +72,6 @@ const productController = {
     }
 };
 
+// Comment
+// Exporting module
 export default productController;

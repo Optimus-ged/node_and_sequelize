@@ -13,6 +13,7 @@ dotenv.config();
 // Comment
 // Variables declaration
 const app = express();
+const port = process.env.port || 3000;
 
 // Comment
 // Middlewares
@@ -20,7 +21,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use('/api', allRouters);
 app.use('**', (req, res, next) => {
-    res.status(401).json({
+    res.status(404).json({
         error: {
             message: 'The Request was not found on the server'
         }
@@ -29,17 +30,16 @@ app.use('**', (req, res, next) => {
 
 // Comment
 // Testing connection to the database
-const testDbConnection = async () => {
+const testConnection = async () => {
     try {
         database.authenticate();
-        console.log('The connection to the database is Ok !!!');
-    } catch (error) {
-        console.error(error);
+        console.log('The Connection to the database is Ok :::');
+    } catch (er) {
+        console.error(er)
     }
 };
+testConnection();
 
-testDbConnection();
 // Comment
 // Listening to the port
-const port = process.env.port || 3000;
 app.listen(port, () => console.log(`The Server is running at port ${port}`));
