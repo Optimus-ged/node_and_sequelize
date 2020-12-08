@@ -1,6 +1,7 @@
 // Comment
 // Importing dependencies
 import User from '../models/user_model';
+import bcrypt from 'bcrypt';
 
 // Comment
 // User Controller 
@@ -53,29 +54,43 @@ const userController = {
     // Comment
     // Creating a user
     addUser: async (req, res) => {
-        let response = await User.create({
-            email: req.body.email,
-            password: req.body.password
-        }).then().catch(err => {
-            console.error(err);
-            res.status(500).json({
-                error: {
-                    message: err.message
-                }
-            })
-        });
-        if (response) {
-            return res.status(201).json({
-                status: 201,
-                message: 'Successfully created',
-                user_created: response
-            });
-        }
-        res.status(401).json({
-            error: {
-                message: 'User not created'
+        // Comment
+        // Let's first crypt the pwd before post to the database
+        bcrypt.hash(req.body.password, 10, async (err, hash) => {
+            if (err) {
+                return res.status(500).json({
+                    error: {
+                        message: err.message
+                    }
+                });
             }
+            // Comment
+            // let's now create the data
+            let response = await User.create({
+                email: req.body.email,
+                password: hash
+            }).then().catch(err => {
+                console.error(err);
+                res.status(500).json({
+                    error: {
+                        message: err.message
+                    }
+                })
+            });
+            if (response) {
+                return res.status(201).json({
+                    status: 201,
+                    message: 'Successfully created',
+                    user_created: response
+                });
+            }
+            res.status(401).json({
+                error: {
+                    message: 'User not created'
+                }
+            });
         });
+
     }
 };
 
