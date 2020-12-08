@@ -105,23 +105,8 @@ const userController = {
             where: {
                 email: req.body.email
             }
-        })
-            .then()
-            .catch(err => {
-                console.error(err);
-                res.status(500).json({
-                    error: {
-                        message: err.message
-                    }
-                });
-            });
-        if (!response) {
-            res.status(404).json({
-                error: {
-                    message: 'Address email doesn\'t exist'
-                }
-            });
-        }
+        }).then().catch(err => { console.error(err); });
+
         if (response) {
             let verified = await bcrypt.compare(req.body.password, response.password);
             if (verified) {
@@ -142,7 +127,12 @@ const userController = {
                     message: 'Authentification failed'
                 }
             });
-        }
+        };
+        res.status(404).json({
+            error: {
+                message: 'Authentification failed please check your email'
+            }
+        });
     },
 };
 

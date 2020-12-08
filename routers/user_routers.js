@@ -2,6 +2,7 @@
 // Importing dependencies
 import express from 'express';
 import userController from '../controller/user_controller';
+import checkAuth from '../middleware/token';
 
 // Comment
 // Declaring variables
@@ -10,10 +11,10 @@ const router = express.Router();
 // Comment
 // All user routers
 router
-    .get('/', userController.getUsers)
-    .get('/:id', userController.getOneUser)
+    .get('/', checkAuth, userController.getUsers)
+    .get('/:id', checkAuth, userController.getOneUser)
     .post('/login', userController.loginUser)
-    .post('/signup', userController.addUser)
+    .post('/signup', checkAuth, userController.addUser)
 
 
 // Comment

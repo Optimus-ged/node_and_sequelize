@@ -1,7 +1,8 @@
 // Comment
 // Import dependencies
 import express from 'express';
-import productCtrl from '../controller/product_controller';
+import productController from '../controller/product_controller';
+import checkAuth from '../middleware/token';
 
 // Comment
 // declaring the rooter
@@ -10,8 +11,11 @@ const router = express.Router();
 // Comment
 // All product routers
 router
-    .get('/', productCtrl.getProducts)
-    .get('/:id', productCtrl.getOneProduit)
-    .post('/', productCtrl.addProduct);
+    .get('/', checkAuth, productController.getProducts)
+    .get('/:id', checkAuth, productController.getOneProduit)
+    .post('/', checkAuth, productController.addProduct);
 
+
+// Comment
+// Export module
 export default router;
