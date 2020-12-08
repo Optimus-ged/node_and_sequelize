@@ -10,7 +10,8 @@ const router = express.Router();
 // Comment
 // All user routers
 router
-    .get('/', productController.getUsers);
+    .get('/', productController.getUsers)
+    .get('/:id', productController.getOneUser)
 
 
 // Comment
