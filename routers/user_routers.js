@@ -1,7 +1,7 @@
 // Comment
 // Importing dependencies
 import express from 'express';
-import productController from '../controller/user_controller';
+import userController from '../controller/user_controller';
 
 // Comment
 // Declaring variables
@@ -10,8 +10,9 @@ const router = express.Router();
 // Comment
 // All user routers
 router
-    .get('/', productController.getUsers)
-    .get('/:id', productController.getOneUser)
+    .get('/', userController.getUsers)
+    .get('/:id', userController.getOneUser)
+    .post('/', userController.addUser)
 
 
 // Comment
