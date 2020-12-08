@@ -12,7 +12,8 @@ const router = express.Router();
 router
     .get('/', userController.getUsers)
     .get('/:id', userController.getOneUser)
-    .post('/', userController.addUser)
+    .post('/login', userController.loginUser)
+    .post('/signup', userController.addUser)
 
 
 // Comment
