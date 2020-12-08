@@ -8,7 +8,7 @@ const userController = {
     // Comment
     // get-request for all users
     getUsers: async (req, res) => {
-        let response = await User.find().then().catch(
+        let response = await User.findAll().then().catch(
             err => {
                 console.err(err);
                 res.status(500).json({

@@ -3,7 +3,7 @@
 import express from 'express';
 import bodyparser from 'body-parser';
 import dotenv from 'dotenv';
-import allRouters from './routers/routers_index';
+import allRouters from './routers/principle/routers_index';
 import database from './config/database';
 
 // Comment

@@ -1,6 +1,6 @@
 // Comment
 // Import dependencies
-import Product from '../models/products';
+import Product from '../models/product_model';
 
 // Comment
 // The product controller

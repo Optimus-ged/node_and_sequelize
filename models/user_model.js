@@ -15,7 +15,7 @@ const user = database.define('user',{
         allowNull : false
     }
 },{
-    timestamps = false
+    timestamps : false
 });
 
 // Comment
