@@ -1,7 +1,7 @@
 // Comment
 // Import dependencies
 import express from 'express';
-import productRoutes from './product_router';
+import productRoutes from '../product_router';
 
 const router = express.Router();
 
