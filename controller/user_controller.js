@@ -2,6 +2,12 @@
 // Importing dependencies
 import User from '../models/user_model';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+// Comment
+// Config dotenv
+dotenv.config();
 
 // Comment
 // User Controller 
@@ -117,27 +123,24 @@ const userController = {
             });
         }
         if (response) {
-            return bcrypt.compare(req.body.password, response.password, (err, verified) => {
-                if (err) {
-                    return res.status(409).json({
-                        error: {
-                            status: 409,
-                            message: 'Authentification failed'
-                        }
-                    });
-                }
-                if (verified) {
-                    return res.status(200).json({
-                        status: 200,
-                        message: 'Authentification success'
-                    });
-                }
-                return res.status(409).json({
-                    error: {
-                        status: 409,
-                        message: 'Authentification failed'
-                    }
+            let verified = await bcrypt.compare(req.body.password, response.password);
+            if (verified) {
+                const token = jwt.sign(
+                    { email: response.email, id: response.id },
+                    process.env.JWT_KEY,
+                    { expiresIn: process.env.EXPIRE_TOKEN }
+                );
+                return res.status(200).json({
+                    status: 200,
+                    message: 'Authentification success',
+                    token: token
                 });
+            }
+            res.status(409).json({
+                error: {
+                    status: 409,
+                    message: 'Authentification failed'
+                }
             });
         }
     },
