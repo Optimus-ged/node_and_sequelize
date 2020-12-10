@@ -134,6 +134,36 @@ const userController = {
             }
         });
     },
+
+    // Comment
+    // Update data for users
+    updateUser: async (req, res) => {
+        let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+        let response = await User.findOne({ where: { id: _id } });
+        if (!response) {
+            res.status(404).json({
+                status: 404,
+                message: 'Product not found'
+            });
+        }
+        if (response) {
+            let updated = await User.update(
+                { email: req.body.email },
+                { where: { id: _id } }
+            );
+            if (updated[0] != 0) {
+                res.status(200).json({
+                    status: 200,
+                    message: 'Product Updated Successfully'
+                });
+            } else {
+                res.status(500).json({
+                    status: 500,
+                    message: 'Product Not updated'
+                });
+            }
+        }
+    }
 };
 
 // Comment

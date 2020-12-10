@@ -28,12 +28,7 @@ const productController = {
     // Get product by id controller
     getOneProduit: async (req, res) => {
         let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-        let response = await Product.findOne({
-            where: id
-        })
-            .then().catch(err => {
-                console.error(err);
-            });
+        let response = await Product.findOne({ where: id })
         if (response) {
             return res.status(200).json({
                 status: 200,
@@ -117,7 +112,9 @@ const productController = {
             await Product.destroy({ where: { id: _id } });
             res.status(200).json({
                 status: 200,
-                message: 'Product deleted Successfully'
+                data: {
+                    message: 'Product deleted Successfully'
+                }
             });
         }
     },

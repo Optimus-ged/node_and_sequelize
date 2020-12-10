@@ -15,7 +15,7 @@ router
     .get('/:id', checkAuth, userController.getOneUser)
     .post('/login', userController.loginUser)
     .post('/signup', checkAuth, userController.addUser)
-
+    .put('/:id', checkAuth, userController.updateUser)
 
 // Comment
 // Exporting module
