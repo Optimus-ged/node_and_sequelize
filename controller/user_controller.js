@@ -52,7 +52,8 @@ const userController = {
         }
         res.status(404).json({
             error: {
-                message: 'Product not found'
+                status : 404,
+                message: 'User not found'
             }
         });
     },
@@ -143,7 +144,7 @@ const userController = {
         if (!response) {
             res.status(404).json({
                 status: 404,
-                message: 'Product not found'
+                message: 'User not found'
             });
         }
         if (response) {
@@ -154,16 +155,41 @@ const userController = {
             if (updated[0] != 0) {
                 res.status(200).json({
                     status: 200,
-                    message: 'Product Updated Successfully'
+                    message: 'User Updated Successfully'
                 });
             } else {
                 res.status(500).json({
                     status: 500,
-                    message: 'Product Not updated'
+                    message: 'User Not updated'
                 });
             }
         }
-    }
+    },
+
+    // Comment
+    // Delete a User
+    deleteUser: async (req, res) => {
+        let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+        let response = await User.findOne({ where: { id: _id } });
+        if (!response) {
+            return res.status(404).json({
+                status: 404,
+                message: 'User not found'
+            })
+        }
+        if (response) {
+            await User.destroy({ where: { id: _id } });
+            res.status(200).json({
+                status: 200,
+                message: 'User Deleted successfully'
+            });
+        } else {
+            res.status(500).json({
+                status: 500,
+                message: 'User not deleted'
+            });
+        }
+    },
 };
 
 // Comment

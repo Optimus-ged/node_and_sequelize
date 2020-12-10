@@ -16,7 +16,7 @@ router
     .post('/login', userController.loginUser)
     .post('/signup', checkAuth, userController.addUser)
     .put('/:id', checkAuth, userController.updateUser)
-
+    .delete('/:id',checkAuth, userController.deleteUser)
 // Comment
 // Exporting module
 export default router;
