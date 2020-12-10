@@ -74,46 +74,35 @@ const productController = {
     },
 
     // Comment
-    // update ad product
+    // Update a product
     updateProduct: async (req, res) => {
-        const id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-        const response = await Product.findOne({ where: { id: id } });
+        const _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+        const response = await Product.findOne({ where: { id: _id } });
         if (!response) {
-            return res.status(404).json({
-                error: {
-                    message: 'Product doesn\'t exist'
-                }
+            res.status(404).json({
+                status: 404,
+                message: 'Product not found',
             });
         }
         if (response) {
             const updated = await Product.update(
-
-                {name : req.body.name},
-
-                { where: { id: id } }).then().catch(err => {
-                    console.error(err);
-                    res.status(500).json({
-                        error: {
-                            status: 500,
-                            message: err.message
-                        }
-                    });
-                });
+                { name: req.body.name },
+                { where: { id: _id } }
+            );
             if (updated[0] != 0) {
-                console.log(updated);
                 res.status(200).json({
                     status: 200,
-                    message: 'Success updated',
+                    message: 'Product updated succesfully'
                 });
             } else {
-                return res.status(404).json({
-                    error: {
-                        message: 'Product Not Updated'
-                    }
+                res.status(500).json({
+                    status: 500,
+                    message: 'Product not updated'
                 });
             }
         }
-    }
+    },
+
 };
 
 // Comment
