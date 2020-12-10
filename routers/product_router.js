@@ -14,6 +14,7 @@ router
     .get('/', checkAuth, productController.getProducts)
     .get('/:id', checkAuth, productController.getOneProduit)
     .post('/', checkAuth, productController.addProduct)
+    .delete('/:id', checkAuth, productController.deleteProduct)
     .put('/:id', checkAuth, productController.updateProduct)
 
 

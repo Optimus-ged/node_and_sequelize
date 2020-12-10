@@ -76,8 +76,8 @@ const productController = {
     // Comment
     // Update a product
     updateProduct: async (req, res) => {
-        const _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-        const response = await Product.findOne({ where: { id: _id } });
+        let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+        let response = await Product.findOne({ where: { id: _id } });
         if (!response) {
             res.status(404).json({
                 status: 404,
@@ -103,6 +103,24 @@ const productController = {
         }
     },
 
+    // Comment
+    // Delete a product
+    deleteProduct: async (req, res) => {
+        let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+        let response = await Product.findOne({ where: { id: _id } });
+        if (!response) {
+            res.status(404).json({
+                status: 404,
+                message: 'Product does not exist'
+            });
+        } else {
+            await Product.destroy({ where: { id: _id } });
+            res.status(200).json({
+                status: 200,
+                message: 'Product deleted Successfully'
+            });
+        }
+    },
 };
 
 // Comment
