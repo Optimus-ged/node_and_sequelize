@@ -13,7 +13,8 @@ const router = express.Router();
 router
     .get('/', checkAuth, productController.getProducts)
     .get('/:id', checkAuth, productController.getOneProduit)
-    .post('/', checkAuth, productController.addProduct);
+    .post('/', checkAuth, productController.addProduct)
+    .put('/:id', checkAuth, productController.updateProduct)
 
 
 // Comment
