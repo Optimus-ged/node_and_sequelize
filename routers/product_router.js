@@ -3,7 +3,7 @@
 import express from 'express';
 import productController from '../controller/product_controller';
 import checkAuth from '../middleware/token';
-import validateProduct from '../middleware/product_validate';
+import productvalidation from '../middleware/product_validate';
 
 // Comment
 // declaring the rooter
@@ -14,7 +14,7 @@ const router = express.Router();
 router
     .get('/', checkAuth, productController.getProducts)
     .get('/:id', checkAuth, productController.getOneProduit)
-    .post('/', checkAuth, validateProduct.addProduct, productController.addProduct)
+    .post('/', checkAuth, productvalidation.addProduct, productController.addProduct)
     .delete('/:id', checkAuth, productController.deleteProduct)
     .put('/:id', checkAuth, productController.updateProduct)
 
