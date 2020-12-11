@@ -81,8 +81,11 @@ const productController = {
             });
         }
         if (response) {
-            const updated = await Product.update(
-                { name: req.body.name },
+            let updated = await Product.update(
+                {
+                    name: req.body.name,
+                    price: req.body.price
+                },
                 { where: { id: _id } }
             );
             if (updated[0] != 0) {

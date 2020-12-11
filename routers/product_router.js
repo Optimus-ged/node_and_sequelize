@@ -14,9 +14,9 @@ const router = express.Router();
 router
     .get('/', checkAuth, productController.getProducts)
     .get('/:id', checkAuth, productController.getOneProduit)
-    .post('/', checkAuth, productvalidation.addProduct, productController.addProduct)
+    .post('/', checkAuth, productvalidation.validatedProduct, productController.addProduct)
     .delete('/:id', checkAuth, productController.deleteProduct)
-    .put('/:id', checkAuth, productController.updateProduct)
+    .put('/:id', checkAuth, productvalidation.validatedProduct, productController.updateProduct)
 
 
 // Comment

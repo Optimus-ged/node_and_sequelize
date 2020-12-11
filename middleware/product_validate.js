@@ -5,7 +5,7 @@ import Joi from 'joi';
 // Comment
 // Product validation with joi dependency
 const productvalidation = {
-    addProduct: async (req, res, next) => {
+    validatedProduct: async (req, res, next) => {
         let schema = Joi.object({
             name : Joi.string().min(6).max(50).required(),
             price : Joi.number().precision(2).required()
