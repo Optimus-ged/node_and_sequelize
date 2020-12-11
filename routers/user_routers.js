@@ -14,7 +14,7 @@ const router = express.Router();
 router
     .get('/', checkAuth, userController.getUsers)
     .get('/:id', checkAuth, userController.getOneUser)
-    .post('/login', userController.loginUser)
+    .post('/login', userValidation.userValidate, userController.loginUser)
     .post('/signup', userValidation.userValidate, checkAuth, userController.addUser)
     .put('/:id', checkAuth, userController.updateUser)
     .delete('/:id',checkAuth, userController.deleteUser)
