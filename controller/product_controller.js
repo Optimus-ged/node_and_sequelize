@@ -1,7 +1,6 @@
 // Comment
 // Import dependencies
 import Product from '../models/product_model';
-import Joi from 'joi';
 
 // Comment
 // The product controller
