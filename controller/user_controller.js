@@ -52,51 +52,48 @@ const userController = {
         }
         res.status(404).json({
             error: {
-                status : 404,
+                status: 404,
                 message: 'User not found'
             }
         });
     },
 
     // Comment
-    // Creating a user
+    // Add user sign up
     addUser: async (req, res) => {
-        // Comment
-        // Let's first crypt the pwd before post to the database
-        bcrypt.hash(req.body.password, 10, async (err, hash) => {
-            if (err) {
-                return res.status(500).json({
-                    error: {
-                        message: err.message
-                    }
-                });
+        let emailExist = await User.findOne({
+            where: {
+                email: req.body.email
             }
-            // Comment
-            // let's now create the data
+        })
+        if (emailExist) {
+            return res.status(500).json({
+                status: 500,
+                message: 'The email you are using is already used'
+            });
+        } else {
+            let cryptedPwd = await bcrypt.hash(req.body.password, 10);
             let response = await User.create({
                 email: req.body.email,
-                password: hash
-            }).then().catch(err => {
-                console.error(err);
+                password: cryptedPwd
+            }).catch(err => {
+                console.log(err);
                 res.status(500).json({
                     error: {
+                        status: 500,
                         message: err.message
                     }
-                })
+                });
             });
+
             if (response) {
-                return res.status(201).json({
+                res.status(201).json({
                     status: 201,
-                    message: 'Successfully created',
-                    user_created: response
+                    message: 'User created successfully',
+                    response: response
                 });
             }
-            res.status(401).json({
-                error: {
-                    message: 'User not created'
-                }
-            });
-        });
+        }
     },
 
     // Comment
