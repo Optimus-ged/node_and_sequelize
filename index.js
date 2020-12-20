@@ -13,7 +13,7 @@ dotenv.config();
 // Comment
 // Variables declaration
 const app = express();
-const port = process.env.port || 3600;
+const port = process.env.port || 3000;
 
 // Comment
 // Middlewares

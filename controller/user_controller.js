@@ -60,7 +60,7 @@ const userController = {
 
     // Comment
     // Add user sign up
-    addUser: async (req, res) => {
+    signup: async (req, res) => {
         let emailExist = await User.findOne({
             where: {
                 email: req.body.email
@@ -68,8 +68,10 @@ const userController = {
         })
         if (emailExist) {
             return res.status(500).json({
-                status: 500,
-                message: 'The email you are using is already used'
+                error: {
+                    status: 500,
+                    message: 'The email you are using is already used'
+                }
             });
         } else {
             let cryptedPwd = await bcrypt.hash(req.body.password, 10);

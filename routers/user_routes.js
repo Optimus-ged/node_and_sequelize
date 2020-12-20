@@ -15,9 +15,9 @@ router
     .get('/', checkAuth, userController.getUsers)
     .get('/:id', checkAuth, userController.getOneUser)
     .post('/login', userValidation.userValidate, userController.loginUser)
-    .post('/signup', userValidation.userValidate, checkAuth, userController.addUser)
+    .post('/signup', userValidation.userValidate, checkAuth, userController.signup)
     .put('/:id', checkAuth, userController.updateUser)
-    .delete('/:id',checkAuth, userController.deleteUser)
+    .delete('/:id', checkAuth, userController.deleteUser)
 // Comment
 // Exporting module
 export default router;
