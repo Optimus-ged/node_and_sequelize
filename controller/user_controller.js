@@ -98,6 +98,19 @@ const userController = {
         }
     },
 
+    signup2: async (req, res) => {
+        let array = req.body;
+        for(let i = 0; i < array.length; i++){
+            User.create({
+                email : array[i].email,
+                password : array[i].password
+            }).catch(err => console.log(err.message));
+        }
+        res.status(200).json({
+            message : 'Created'
+        });
+    },
+
     // Comment
     // Login for user
     loginUser: async (req, res) => {
