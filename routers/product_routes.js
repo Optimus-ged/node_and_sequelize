@@ -14,6 +14,7 @@ const router = express.Router();
 router
     .get('/', checkAuth, productController.getProducts)
     .get('/:id', checkAuth, productController.getOneProduit)
+    .post('/many', checkAuth, productController.addProducts)
     .post('/', checkAuth, productvalidation.validatedProduct, productController.addProduct)
     .put('/:id', checkAuth, productvalidation.validatedProduct, productController.updateProduct)
     .delete('/:id', checkAuth, productController.deleteProduct)

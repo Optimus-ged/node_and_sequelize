@@ -10,7 +10,8 @@ const productvalidation = {
             name : Joi.string().min(6).max(50).required(),
             price : Joi.number().precision(2).required()
         });
-        let { error } = schema.validate(req.body);
+
+        let { error } = schema2.validate(req.body);
         if(error){
             return res.status(400).json({
                 status : 400,

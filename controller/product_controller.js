@@ -69,6 +69,30 @@ const productController = {
     },
 
     // Comment
+    // Adding many products at once
+    addProducts: async (req, res) => {
+        let data = req.body;
+        let response = [];
+
+        for (let i = 0; i < data.length; i++) {
+            response.push(
+                await Product.create({
+                    name : data[i].name,
+                    price : data[i].price
+                })
+            )
+        }
+
+        if(response.length > 0){
+            res.status(200).json({
+                status : 200,
+                message : 'All products success created',
+                response : response
+            });
+        }
+    },
+
+    // Comment
     // Update a product
     updateProduct: async (req, res) => {
         let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
