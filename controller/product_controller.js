@@ -44,29 +44,27 @@ const productController = {
     },
 
     // Comment
-    // add product
+    // Add product
     addProduct: async (req, res) => {
         let data = {
             name: req.body.name,
             price: isNaN(parseFloat(req.body.price)) ? 0 : parseFloat(req.body.price)
         };
+
         let response = await Product.create({
             name: data.name,
             price: data.price
-        }).then().catch(err => console.error(err));
+        }).catch(err => { console.error(err); });
+
         if (response) {
-            return res.status(201).json({
+            res.status(201).json({
                 status: 201,
                 message: 'Product Successfully created',
                 response: response
-            })
+            });
         }
-        res.status(500).json({
-            error: {
-                message: 'Not created'
-            }
-        });
     },
+
 
     // Comment
     // Adding many products at once
@@ -77,17 +75,17 @@ const productController = {
         for (let i = 0; i < data.length; i++) {
             response.push(
                 await Product.create({
-                    name : data[i].name,
-                    price : data[i].price
+                    name: data[i].name,
+                    price: data[i].price
                 })
             )
         }
 
-        if(response.length > 0){
+        if (response.length > 0) {
             res.status(200).json({
-                status : 200,
-                message : 'All products success created',
-                response : response
+                status: 200,
+                message: 'All products success created',
+                response: response
             });
         }
     },
@@ -146,6 +144,7 @@ const productController = {
         }
     },
 };
+
 
 // Comment
 // Exporting module
