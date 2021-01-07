@@ -8,14 +8,7 @@ const productController = {
     // Comment
     // Get-all products controller
     getProducts: async (req, res) => {
-        let response = await Product.findAll().then().catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: {
-                    message: err.message
-                }
-            });
-        });
+        let response = await Product.findAll().catch(err => { console.log(err); });
         res.status(200).json({
             status: 200,
             message: 'All products successfully getted',
