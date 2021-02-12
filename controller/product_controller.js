@@ -14,6 +14,7 @@ const productController = {
             message: 'All products successfully getted',
             count: response.length,
             products: response
+            
         });
     },
 
