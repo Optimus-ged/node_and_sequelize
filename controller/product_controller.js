@@ -64,25 +64,26 @@ const productController = {
   },
 
   // Comment
-  // Adding many products at once
-  addProducts: async (req, res) => {
+  // Creating many products at once
+  addProducts : async (req, res)=>{
     let data = req.body;
     let response = [];
 
-    for (let i = 0; i < data.length; i++) {
+    for(let i = 0; i < data.length ; i++){
       response.push(
         await Product.create({
-          name: data[i].name,
-          price: data[i].price,
+          name : data[i].name,
+          price : data[i].price
         })
       );
     }
 
-    if (response.length > 0) {
-      res.status(200).json({
-        status: 200,
-        message: "All products success created",
-        response: response,
+    if(response.length < 0){
+      res.status(201).json({
+        status : 201,
+        length : response.length,
+        message : "Success created",
+        response : response
       });
     }
   },
@@ -93,11 +94,12 @@ const productController = {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
     let response = await Product.findOne({ where: { id: _id } });
     if (!response) {
-      return res.status(404).json({
+      res.status(404).json({
         status: 404,
-        message: "This product does not Exist",
+        message: "Product not found",
       });
-    } else {
+    }
+    if (response) {
       let updated = await Product.update(
         {
           name: req.body.name,
@@ -108,12 +110,12 @@ const productController = {
       if (updated[0] != 0) {
         res.status(200).json({
           status: 200,
-          message: "Product Successfully updated",
+          message: "Product updated succesfully",
         });
       } else {
         res.status(500).json({
           status: 500,
-          message: "Product update failure",
+          message: "Product not updated",
         });
       }
     }
