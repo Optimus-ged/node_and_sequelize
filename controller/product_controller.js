@@ -1,5 +1,6 @@
 // Comment
 // Import dependencies
+import { json } from "sequelize/types";
 import Product from "../models/product_model";
 
 // Comment
@@ -92,12 +93,11 @@ const productController = {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
     let response = await Product.findOne({ where: { id: _id } });
     if (!response) {
-      res.status(404).json({
+      return res.status(404).json({
         status: 404,
-        message: "Product not found",
+        message: "This product does not Exist",
       });
-    }
-    if (response) {
+    } else {
       let updated = await Product.update(
         {
           name: req.body.name,
@@ -108,12 +108,12 @@ const productController = {
       if (updated[0] != 0) {
         res.status(200).json({
           status: 200,
-          message: "Product updated succesfully",
+          message: "Product Successfully updated",
         });
       } else {
         res.status(500).json({
           status: 500,
-          message: "Product not updated",
+          message: "Product update failure",
         });
       }
     }
@@ -127,13 +127,15 @@ const productController = {
     if (!response) {
       res.status(404).json({
         status: 404,
-        message: "This product does not exist",
+        message: "Product does not exist",
       });
     } else {
       await Product.destroy({ where: { id: _id } });
       res.status(200).json({
         status: 200,
-        message: "Product successfully deleted",
+        data: {
+          message: "Product deleted Successfully",
+        },
       });
     }
   },
