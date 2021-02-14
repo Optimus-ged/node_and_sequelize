@@ -7,16 +7,19 @@ import Product from "../models/product_model";
 // The product controller
 const productController = {
   // Comment
-  // Get-all products controller
-  getProducts: async (req, res) => {
-    let response = await Product.findAll().catch((err) => {
-      console.log(err);
-    });
-    res.status(200).json({
-      status: 200,
-      message: "All products successfully getted",
-      count: response.length,
-      products: response,
+  // Get all products
+  getProducts : async (req, res) =>{
+    let response = await Product.findAll().catch(err => console.error(err));
+    if(!response){
+      return res.status(500).json({
+        error : {
+          message : "Error"
+        }
+      });
+    }
+
+    return res.status(200).json({
+      stat
     });
   },
 
