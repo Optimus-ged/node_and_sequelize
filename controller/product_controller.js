@@ -1,6 +1,5 @@
 // Comment
 // Import dependencies
-import { json } from "sequelize/types";
 import Product from "../models/product_model";
 
 // Comment
