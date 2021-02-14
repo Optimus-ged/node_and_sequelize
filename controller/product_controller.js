@@ -41,24 +41,22 @@ const productController = {
 
   // Comment
   // Add product
-  addProduct: async (req, res) => {
+  addProduct : async (req, res)=>{
     let data = {
-      name: req.body.name,
-      price: isNaN(parseFloat(req.body.price)) ? 0 : parseFloat(req.body.price),
+      name : req.body.name,
+      price : isNaN(parseFloat(req.body.price)) ? 0 : parseFloat(re.body.price)
     };
 
     let response = await Product.create({
-      name: data.name,
-      price: data.price,
-    }).catch((err) => {
-      console.error(err);
-    });
+      name : data.name,
+      price : data.price
+    }).catch(err => console.error(err));
 
-    if (response) {
+    if(response){
       res.status(201).json({
-        status: 201,
-        message: "Product Successfully created",
-        response: response,
+        status : 201,
+        message : "Success created",
+        response : response
       });
     }
   },
