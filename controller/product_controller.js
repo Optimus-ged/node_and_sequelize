@@ -64,26 +64,25 @@ const productController = {
   },
 
   // Comment
-  // Creating many products at once
-  addProducts : async (req, res)=>{
+  // Adding many products at once
+  addProducts: async (req, res) => {
     let data = req.body;
     let response = [];
 
-    for(let i = 0; i < data.length ; i++){
+    for (let i = 0; i < data.length; i++) {
       response.push(
         await Product.create({
-          name : data[i].name,
-          price : data[i].price
+          name: data[i].name,
+          price: data[i].price,
         })
       );
     }
 
-    if(response.length < 0){
+    if (response.length > 0) {
       res.status(201).json({
-        status : 201,
-        length : response.length,
-        message : "Success created",
-        response : response
+        status: 201,
+        message: "All products success created",
+        response: response,
       });
     }
   },
