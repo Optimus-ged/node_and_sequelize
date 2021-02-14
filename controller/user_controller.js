@@ -61,76 +61,79 @@ const userController = {
   },
 
   // Comment
-  // Add User (sign up)
-  signUp: async (req, res) => {
+  // Add user sign up
+  signup: async (req, res) => {
     let emailExist = await User.findOne({
-      where: req.body.email,
-    }).catch((err) => console.error(err.message));
-
-    if(emailExist){
-        return res.status(409).json({
-            status : 409,
-            message : "Email does already exist"
-        });
-    }
-
-    let cryptedPwd = await bcrypt.hash(req.body.password);
-    let response = await User.create({
-        email : req.body.email,
-        password : cryptedPwd
-    }).catch(err => {
-        console.error(err.message);
-        res.status(500).json({
-            status : 500,
-            message : err.message
-        });
+      where: {
+        email: req.body.email,
+      },
     });
-
-    if(response){
-        return res.status(201).json({
-            status : 201,
-            message : "You signed up successfully",
-            response : response
+    if (emailExist) {
+      return res.status(500).json({
+        error: {
+          status: 500,
+          message: "The email you are using is already used",
+        },
+      });
+    } else {
+      let cryptedPwd = await bcrypt.hash(req.body.password, 10);
+      let response = await User.create({
+        email: req.body.email,
+        password: cryptedPwd,
+      }).catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          error: {
+            status: 500,
+            message: err.message,
+          },
         });
+      });
+
+      if (response) {
+        return res.status(201).json({
+          status: 201,
+          message: "User created successfully",
+          response: response,
+        });
+      }
     }
   },
 
   // Comment
-  // Login for user
+  // Login User
   loginUser: async (req, res) => {
     let response = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    }).catch((err) => {
-      console.error(err);
-    });
+      where: { email: req.body.email },
+    }).catch((err) => console.error(err));
 
-    if (response) {
-      let verified = await bcrypt.compare(req.body.password, response.password);
-      if (verified) {
-        let token = jwt.sign(
-          { email: response.email, id: response.id },
-          process.env.JWT_KEY,
-          { expiresIn: process.env.EXPIRE_TOKEN }
-        );
-        return res.status(200).json({
-          status: 200,
-          message: "Authentification success",
-          token: token,
-        });
-      }
-      res.status(409).json({
+    if (!response) {
+      return res.status(404).json({
+        status: 404,
+        message: "Authentification failed please check your email",
+      });
+    }
+
+    let verified = await bcrypt.compare(req.body.password, response.password);
+    if (!verified) {
+      return res.status(500).json({
+        status: 500,
         error: {
-          status: 409,
           message: "Authentification failed",
         },
       });
     }
-    res.status(404).json({
-      error: {
-        message: "Authentification failed please check your email",
-      },
+
+    let token = jwt.sign(
+      { email: req.body.email, id: response.id },
+      process.env.JWT_KEY,
+      { expiresIn: process.env.EXPIRE_TOKEN }
+    );
+
+    res.status(200).json({
+      status: 200,
+      message: "Authentification success",
+      token: token,
     });
   },
 
