@@ -20,43 +20,47 @@ const productController = {
     });
   },
 
-  // Comment
+  /// Comment
   // Get product by id controller
   getOneProduit: async (req, res) => {
     let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let response = await Product.findOne({ where: id });
+    let response = await Product.findOne({ where: id }).catch((err) =>
+      console.error(err)
+    );
     if (response) {
-      return res.status(200).json({
-        status: 200,
-        message: "Product successfully getted",
-        product: response,
+      return res.status(401).json({
+        error: {
+          message: "product not found",
+        },
       });
     }
-    res.status(401).json({
-      error: {
-        message: "product not found",
-      },
+    return res.status(200).json({
+      status: 200,
+      message: "Product successfully getted",
+      product: response,
     });
   },
 
   // Comment
   // Add product
-  addProduct : async (req, res)=>{
+  addProduct: async (req, res) => {
     let data = {
-      name : req.body.name,
-      price : isNaN(parseFloat(req.body.price)) ? 0 : parseFloat(re.body.price)
+      name: req.body.name,
+      price: isNaN(parseFloat(req.body.price)) ? 0 : parseFloat(req.body.price),
     };
 
     let response = await Product.create({
-      name : data.name,
-      price : data.price
-    }).catch(err => console.error(err));
+      name: data.name,
+      price: data.price,
+    }).catch((err) => {
+      console.error(err);
+    });
 
-    if(response){
-      res.status(201).json({
-        status : 201,
-        message : "Success created",
-        response : response
+    if (response) {
+      return res.status(201).json({
+        status: 201,
+        message: "Product Successfully created",
+        response: response,
       });
     }
   },
