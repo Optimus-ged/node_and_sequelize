@@ -177,15 +177,10 @@ const userController = {
             })
         }
         if (response) {
-            await User.destroy({ where: { id: _id } });
+            await User.destroy({ where: { id: _id } }).catch(err => console.error(err));
             res.status(200).json({
                 status: 200,
                 message: 'User Deleted successfully'
-            });
-        } else {
-            res.status(500).json({
-                status: 500,
-                message: 'User not deleted'
             });
         }
     },
