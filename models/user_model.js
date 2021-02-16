@@ -1,28 +1,28 @@
 // Comment
-// Importing dependancies
-import Sequelize from 'sequelize';
-import Database from '../config/database';
+// Import depedndancies
+import Sequelize from "sequelize";
+import database from "../config/database";
 
 // Comment
-// Defining user modal
-const User = Database.define(
-    "user",
-    {
-        email : {
-            type : Sequelize.STRING,
-            allowNull : false
-        },
-        password : {
-            type : Sequelize.STRING,
-            allowNull : false
-        }
+// defining user model
+const user = database.define(
+  "user",
+  {
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
-    {
-        timeStamp : false,
-        freezeTableName : true
-    }
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    timestamps: false,
+    freezeTableName: true,
+  }
 );
 
 // Comment
-// Exporting module
-export default User;
+// Export model
+export default user;
