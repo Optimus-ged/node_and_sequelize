@@ -1,28 +1,28 @@
-// Comment
-// Importing dependancies
-import Sequelize from 'sequelize';
-import Database from '../config/database';
+// Comments
+// Import dependencies
+import Sequelize from "sequelize";
+import database from "../config/database";
 
 // Comment
-// Defining modal
-const Product = Database.define(
+// profuct model
+const product = database.define(
   "product",
   {
-    name : {
-      type : Sequelize.STRING,
-      allowNull : false
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
-    price : {
-      type : Sequelize.FLOAT,
-      allowNull : false
-    }
+    price: {
+      type: Sequelize.FLOAT,
+      allowNull: false,
+    },
   },
   {
-    timeStamp : false,
-    freezeTableName : true
+    timestamps: false,
+    freezeTableName: true,
   }
 );
 
 // Comment
-// Exporting module
-export default Product;
+// Exporting model
+export default product;
