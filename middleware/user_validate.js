@@ -1,20 +1,20 @@
 // Comment
-// Importing dependencies
+// Import dependancy
 import Joi from 'joi';
 
 // Comment
-// user validation
-const userValidation = {
-    userValidate: async (req, res, next) => {
+// User validation
+const UserValidation = {
+    UserValidate = async (req, res, next)=> {
         let schema = Joi.object({
-            email: Joi.string().min(5).required(),
-            password: Joi.string().min(5).required()
+            email : Joi.string().min(5).required(),
+            password : Joi.string().min(5).required()
         });
-        let { error } = schema.validate(req.body);
-        if (error) {
-            return res.status(400).json({
-                status: 400,
-                message: error.details[0].message
+        const {error} = schema.validate(req.body);
+        if(error){
+            return res.status(500).json({
+                status : 500,
+                message : error.details[0].message
             });
         }
         next();
@@ -23,4 +23,4 @@ const userValidation = {
 
 // Comment
 // Exporting module
-export default userValidation;
+export default UserValidation;
