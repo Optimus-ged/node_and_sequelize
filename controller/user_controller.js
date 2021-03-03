@@ -36,16 +36,9 @@ const userController = {
   // Handling get-request for one user
   getOneUser: async (req, res) => {
     let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let response = await User.findOne({ where: id })
-      .then()
-      .catch((err) => {
-        console.error(err);
-        res.status(500).json({
-          error: {
-            message: err.message,
-          },
-        });
-      });
+    let response = await User.findOne({ where: id }).catch((err) => {
+      console.error(err);
+    });
     if (response) {
       return res.status(200).json({
         status: 200,

@@ -31,14 +31,14 @@ const productController = {
     let response = await Product.findOne({ where: id }).catch((err) =>
       console.error(err)
     );
-    if (response) {
+    if (!response) {
       return res.status(401).json({
         error: {
           message: "product not found",
         },
       });
     }
-    return res.status(200).json({
+    res.status(200).json({
       status: 200,
       message: "Product successfully getted",
       product: response,
