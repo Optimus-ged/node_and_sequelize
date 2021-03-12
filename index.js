@@ -3,8 +3,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import allRouters from "./routers/principle/routers_index";
-import database from "./config/database";
+// import allRouters from "./routers/principle/routers_index";
+// import database from "./config/database";
 
 // Comment
 // Config dotenv for environment variables
@@ -19,7 +19,7 @@ const port = process.env.port || 3000;
 // Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/api", allRouters);
+// app.use("/api", allRouters);
 app.get("/", function (req, res) {
   res.status(200).json({
     status: 200,
@@ -38,13 +38,13 @@ app.use("**", (req, res, next) => {
 // Testing connection to the database
 const testConnection = async () => {
   try {
-    database.authenticate();
+    // database.authenticate();
     console.log("The Connection to the database is Ok :::");
   } catch (er) {
     console.error(er);
   }
 };
-testConnection();
+// testConnection();
 
 // Comment
 // Listening to the port
