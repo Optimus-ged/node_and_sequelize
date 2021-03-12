@@ -1,7 +1,7 @@
 // Comment
 // Importing dependencies
 import express from 'express';
-import bodyparser from 'body-parser';
+import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import allRouters from './routers/principle/routers_index';
 import database from './config/database';
@@ -17,8 +17,8 @@ const port = process.env.port || 3000;
 
 // Comment
 // Middlewares
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', allRouters);
 app.use('**', (req, res, next) => {
     res.status(404).json({

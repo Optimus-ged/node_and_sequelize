@@ -19,7 +19,6 @@ router
     .put('/:id', checkAuth, productvalidation.validatedProduct, productController.updateProduct)
     .delete('/:id', checkAuth, productController.deleteProduct)
 
-
 // Comment
 // Export module
 export default router;

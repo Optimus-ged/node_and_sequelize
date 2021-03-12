@@ -15,16 +15,14 @@ const userController = {
   // Comment
   // get-request for all users
   getUsers: async (req, res) => {
-    let response = await User.findAll()
-      .then()
-      .catch((err) => {
-        console.err(err);
-        res.status(500).json({
-          error: {
-            message: err.message,
-          },
-        });
+    let response = await User.findAll().catch((err) => {
+      console.err(err);
+      res.status(500).json({
+        error: {
+          message: err.message,
+        },
       });
+    });
     res.status(200).json({
       status: 200,
       count: response.length,
@@ -161,26 +159,23 @@ const userController = {
   },
 
   // Comment
-  // Delete a User
-  deleteUser: async (req, res) => {
+  // Delete a product
+  deleteUser : async (req, res)=>{
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let response = await User.findOne({ where: { id: _id } });
-    if (!response) {
-      return res.status(404).json({
-        status: 404,
-        message: "User not found",
-      });
-    }
-    if (response) {
-      await User.destroy({ where: { id: _id } }).catch((err) =>
-        console.error(err)
-      );
+    let response = await User.findOne({where : {id : _id}});
+    if(!response){
+      res.status(404).json({
+        status : 400,
+        message : "Id does not Exist"
+      })
+    }else{
+      await User.destroy({where : {id : _id}});
       res.status(200).json({
-        status: 200,
-        message: "User Deleted successfully",
+        status : 200,
+        message : "Success deleted"
       });
     }
-  },
+  }
 };
 
 // Comment
