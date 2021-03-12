@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", function (req, res) {
   res.status(200).json({
     status: 200,
-    message: "welcom",
+    message: "Welcome to Optimus ged Api",
   });
 });
 app.use("**", (req, res, next) => {
