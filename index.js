@@ -19,11 +19,12 @@ const port = process.env.port || 3000;
 // Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // app.use("/api", allRouters);
-app.get("/", function (req, res) {
+app.use("/", (req, res, next) => {
   res.status(200).json({
     status: 200,
-    message: "Welcome to Optimus ged Api",
+    message: "Welcome to Ged-Optimus API !!!",
   });
 });
 
@@ -45,7 +46,7 @@ const testConnection = async () => {
     console.error(er);
   }
 };
-// testConnection();
+testConnection();
 
 // Comment
 // Listening to the port
