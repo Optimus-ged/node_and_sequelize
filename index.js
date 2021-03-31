@@ -1,7 +1,6 @@
 // Comment
 // Importing dependencies
 import express from "express";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import allRouters from "./routers/principle/routers_index";
 import database from "./config/database";
@@ -17,11 +16,21 @@ const port = process.env.port || 3000;
 
 // Comment
 // Middlewares
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Comment
+// Config all Routes
 app.use("/api", allRouters);
+
 app.get("/", (req, res, next) => {
+  res.status(200).json({
+    status: 200,
+    message: "Welcome to Ged-Optimus API !!!",
+  });
+});
+
+app.get("/api", (req, res, next) => {
   res.status(200).json({
     status: 200,
     message: "Welcome to Ged-Optimus API !!!",
