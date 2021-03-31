@@ -1,62 +1,51 @@
-// Comment
-// Importing dependencies
+// Importing dependancies
 import express from "express";
 import dotenv from "dotenv";
-import allRouters from "./routers/principle/routers_index";
 import database from "./config/database";
+import allRoutes from "./routers/principle/routers_index";
 
-// Comment
-// Config dotenv for environment variables
+// Configuring dotenv
 dotenv.config();
 
-// Comment
-// Variables declaration
+// Configuring environment variables
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
-// Comment
-// Middlewares
+// Formatting data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Comment
-// Config all Routes
-app.use("/api", allRouters);
-
-app.get("/", (req, res, next) => {
-  res.status(200).json({
-    status: 200,
-    message: "Welcome to Ged-Optimus API !!!",
-  });
-});
-
-app.get("/api", (req, res, next) => {
-  res.status(200).json({
-    status: 200,
-    message: "Welcome to Ged-Optimus API !!!",
-  });
-});
-
-app.use("**", (req, res, next) => {
-  res.status(404).json({
-    error: {
-      message: "The Request was not found on the server",
-    },
-  });
-});
-
-// Comment
-// Testing connection to the database
+// Testing database connection
 const testConnection = async () => {
   try {
     database.authenticate();
-    console.log("The Connection to the database is Ok :::");
-  } catch (er) {
-    console.error(er);
+    console.log("The conection to the database is OK !!!");
+  } catch (error) {
+    console.error(error);
   }
 };
 testConnection();
 
-// Comment
-// Listening to the port
-app.listen(port, () => console.log(`The Server is running at port ${port}`));
+// Config all routes
+app.use("/api", allRoutes);
+
+// All unknown routes
+app.use("**", (req, res) => {
+  req.status(404).json({
+    status: 404,
+    message: "Request not found on the Server",
+  });
+});
+
+// Welcome visiters of our endpoint
+app.get("/", (res, res) => {
+  res.status(200).json({
+    status: 200,
+    message: "Welcome to Optimus-ged API",
+  });
+});
+
+// Listening port
+app.listen(port, () => {
+  console.log(`The server is running at port ${port}`);
+});
