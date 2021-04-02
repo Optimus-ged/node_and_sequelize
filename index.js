@@ -1,51 +1,51 @@
-// Importing dependancies and others
+// Importing dependancies
 import express from "express";
-import dotenv from "dotenv";
 import database from "./config/database";
 import allRoutes from "./routers/principle/routers_index";
+import dotenv from "dotenv";
 
 // Config dotenv
 dotenv.config();
 
-// Config constants variables
-const app = express();
+// Declaring constants
 const port = process.env.PORT || 3000;
+const app = express();
 
-// Config data formatting
+// Defining middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Conig middlewares
-app.use("/api", allRoutes);
-
-// Welcome guest to our web server
-app.use("/", (req, res) => {
-  res.status(200).json({
-    status: 200,
-    message: "Welcome to Optimus ged Api",
-  });
-});
-
-// Handling errors when endpoint doesn't match
-app.use("**", (req, res) => {
-  res.status(404).json({
-    status: 404,
-    error: {
-      message: "The request was not found on the Server",
-    },
-  });
-});
-
-// Config database
+// Connection to the database
 const testConnection = async () => {
   try {
     database.authenticate();
-    console.log("The connection to the database is Ok !!!");
+    console.log("The conection to the database is OK !!!");
   } catch (error) {
     console.error(error);
   }
 };
 testConnection();
 
-// Config port on with app is listening
+// Config all routes middleware
+app.use("/api", allRoutes);
+
+// Catching all unknown endpoints
+app.use("**", (req, res) => {
+  res.status(404).json({
+    status: 404,
+    error: {
+      message: "Request was not found on the Server",
+    },
+  });
+});
+
+// Config endpoint of welcome guests on our endpoint
+app.use("/", (req, res) => {
+  res.status(200).json({
+    status: 200,
+    message: "Welcome to my api",
+  });
+});
+
+// Listening to the port
 app.listen(port, () => console.log(`The Server is running at port ${port}`));
