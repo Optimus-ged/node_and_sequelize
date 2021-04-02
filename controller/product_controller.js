@@ -1,11 +1,8 @@
-// Comment
 // Import dependencies
 import Product from "../models/product_model";
 
-// Comment
 // The product controller
 const productController = {
-  // Comment
   // Get all products
   getProducts: async (req, res) => {
     let response = await Product.findAll().catch((err) => console.error(err));
@@ -24,7 +21,6 @@ const productController = {
     });
   },
 
-  /// Comment
   // Get product by id controller
   getOneProduit: async (req, res) => {
     let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
@@ -45,7 +41,6 @@ const productController = {
     });
   },
 
-  // Comment
   // Add product
   addProduct: async (req, res) => {
     let data = {
@@ -69,7 +64,6 @@ const productController = {
     }
   },
 
-  // Comment
   // Adding many products at once
   addProducts: async (req, res) => {
     let data = req.body;
@@ -93,7 +87,6 @@ const productController = {
     }
   },
 
-  // Comment
   // Update a product
   updateProduct: async (req, res) => {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
@@ -126,7 +119,6 @@ const productController = {
     }
   },
 
-  // Comment
   // Delete a product
   deleteProduct: async (req, res) => {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
@@ -148,6 +140,5 @@ const productController = {
   },
 };
 
-// Comment
 // Exporting module
 export default productController;

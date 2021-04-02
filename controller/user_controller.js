@@ -1,18 +1,14 @@
-// Comment
 // Importing dependencies
 import User from "../models/user_model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-// Comment
 // Config dotenv
 dotenv.config();
 
-// Comment
 // User Controller
 const userController = {
-  // Comment
   // get-request for all users
   getUsers: async (req, res) => {
     let response = await User.findAll().catch((err) => {
@@ -30,7 +26,6 @@ const userController = {
     });
   },
 
-  // Comment
   // Handling get-request for one user
   getOneUser: async (req, res) => {
     let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
@@ -51,7 +46,6 @@ const userController = {
     });
   },
 
-  // Comment
   // Add user sign up
   signup: async (req, res) => {
     let emailExist = await User.findOne({
@@ -91,7 +85,6 @@ const userController = {
     }
   },
 
-  // Comment
   // Login User
   loginUser: async (req, res) => {
     let response = await User.findOne({
@@ -128,7 +121,6 @@ const userController = {
     });
   },
 
-  // Comment
   // Update data for users
   updateUser: async (req, res) => {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
@@ -158,7 +150,6 @@ const userController = {
     }
   },
 
-  // Comment
   // Delete a product
   deleteUser : async (req, res)=>{
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
@@ -178,6 +169,5 @@ const userController = {
   }
 };
 
-// Comment
 // Exporting module
 export default userController;

@@ -1,9 +1,7 @@
-// Comments
 // Import dependencies
 import Sequelize from "sequelize";
 import database from "../config/database";
 
-// Comment
 // profuct model
 const product = database.define(
   "product",
@@ -23,6 +21,5 @@ const product = database.define(
   }
 );
 
-// Comment
 // Exporting model
 export default product;
