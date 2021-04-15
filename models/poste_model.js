@@ -22,5 +22,11 @@ const poste = database.define(
   }
 );
 
+// References and some other options
+poste.hasOne(agent,{
+  onDelete : "CASCADE",
+  onUpdate : "CASCADE"
+});
+
 // Exporting poste model
 export default poste;

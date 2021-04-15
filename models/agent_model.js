@@ -38,7 +38,10 @@ const agent = database.define(
   }
 );
 
-// Referal data
+// Referrences and other modules
+agent.belongsTo(poste, {
+  foreignKey: "idPoste",
+});
 
 // Exporting module
 export default agent;
