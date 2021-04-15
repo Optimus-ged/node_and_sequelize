@@ -1,9 +1,8 @@
 // Importing dependancies
-import sequelize, { DataTypes } from "sequelize";
 import database from "../config/database";
 
 // Building agent model
-const agent = sequelize.define(
+const agent = database.define(
   "agent",
   {
     id: {
@@ -20,18 +19,18 @@ const agent = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dateNaissance : {
-        type : DataTypes.DATETIME,
-        allowNull : false
+    dateNaissance: {
+      type: DataTypes.DATETIME,
+      allowNull: false,
     },
-    sexe : {
-        type : DataTypes.STRING,
-        allowNull : false
+    sexe: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    photo : {
-        type : DataTypes.STRING,
-        allowNull : false
-    }
+    photo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
@@ -40,7 +39,6 @@ const agent = sequelize.define(
 );
 
 // Referal data
-
 
 // Exporting module
 export default agent;
