@@ -1,5 +1,6 @@
 // Importing dependancies
 import database from "../config/database";
+import DataTypes from "sequelize";
 
 // Building poste agent model
 const poste = database.define(
@@ -23,10 +24,10 @@ const poste = database.define(
 );
 
 // References and some other options
-poste.hasOne(agent,{
-  onDelete : "CASCADE",
-  onUpdate : "CASCADE"
-});
+// poste.hasOne("agent",{
+//   onDelete : "CASCADE",
+//   onUpdate : "CASCADE"
+// });
 
 // Exporting poste model
 export default poste;

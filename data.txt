@@ -8,6 +8,6 @@ CREATE TABLE agent(
 );
 
 CREATE TABLE poste(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT,
     designation VARCHAR(50),
 )
