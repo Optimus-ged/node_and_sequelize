@@ -1,0 +1,13 @@
+CREATE TABLE agent(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    dateNaissance DATETIME,
+    sexe VARCHAR(1),
+    photo TEXT
+);
+
+CREATE TABLE poste(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    designation VARCHAR(50),
+)
