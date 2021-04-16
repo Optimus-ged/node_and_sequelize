@@ -1,22 +1,22 @@
 // Importing dependancies and other modules
 import Agent from "../models/agent_model";
 import poste from "../models/poste_model";
-
+import { Op } from "sequelize";
 
 // Building agent controller
 const agent = {
   // Function for getting all agents
   getAgents: async (req, res) => {
     let response = await Agent.findAll({
-      where: {
-        id: {
-          [Op.and]: {
-            [Op.gt]: 1,
-            [Op.eq]: null,
-          },
-        },
+      where : {
+        id : {
+          [Op.and]:{
+            [Op.eq]:1,
+            [Op.gt]:0
+          }
+        }
       },
-      include: poste,
+      include : poste
     });
     res.status(200).json({
       status: 200,
