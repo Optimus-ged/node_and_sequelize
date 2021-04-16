@@ -38,11 +38,19 @@ const agent = database.define(
   }
 );
 
-// References
-// agent.belongsTo(poste, {
-//   foreignKey: "poste_id",
-//   onDelete : "CASCADE",
-//   onUpdate : "CASCADE"
-// });
+// Adding all references
+agent.belongsTo(poste, {
+  foreignKey: "poste_id",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+});
+
+poste.hasMany(agent,{
+    foreignKey : "poste_id",
+    onDelete : "CASCADE",
+    onUpdate : "CASCADE"
+});
+
+
 
 export default agent;

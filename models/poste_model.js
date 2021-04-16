@@ -1,5 +1,5 @@
 import database from "../config/database";
-import agent from "../models/agent_model";
+// import agent from "../models/agent_model";
 import { DataTypes } from "sequelize";
 
 const poste = database.define(
@@ -16,11 +16,17 @@ const poste = database.define(
     }
 );
 
-// Adding all references
-poste.hasMany(agent,{
-    foreignKey : "poste_id",
-    onDelete : "CASCADE",
-    onUpdate : "CASCADE"
-});
+// // Adding all references
+// poste.hasMany(agent,{
+//     foreignKey : "poste_id",
+//     onDelete : "CASCADE",
+//     onUpdate : "CASCADE"
+// });
+
+// agent.belongsTo(poste, {
+//   foreignKey: "poste_id",
+//   onDelete : "CASCADE",
+//   onUpdate : "CASCADE"
+// });
 
 export default poste;
