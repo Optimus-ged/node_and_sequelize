@@ -15,6 +15,7 @@ const posteController = {
     if (response) {
       return res.status(200).json({
         status: 200,
+        message : "All Messages getted successfully",
         length: response.length,
         response: response,
       });
