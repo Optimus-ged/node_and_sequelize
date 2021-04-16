@@ -7,7 +7,7 @@ const posteController = {
   getPosts: async (req, res) => {
     let response = await Poste.findAll();
     res.status(200).json({
-      message: "All agents postes success getted",
+      message: "All postes success getted",
       response: response,
     });
   },
