@@ -1,5 +1,6 @@
 CREATE TABLE agent(
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT,
+    id_poste INT,
     nom VARCHAR(50),
     prenom VARCHAR(50),
     dateNaissance DATETIME,
