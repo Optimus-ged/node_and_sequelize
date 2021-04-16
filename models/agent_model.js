@@ -1,6 +1,7 @@
 // Importing depedancies and other modules
 import { DataTypes } from "sequelize";
 import database from "../config/database";
+import poste from "../models/poste_model";
 
 // Building agent model
 const agent = database.define(
@@ -22,15 +23,26 @@ const agent = database.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    date_naissance : {
-        type : DataTypes.DATE,
-        allowNull : false
-    }
+    date_naissance: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    poste_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
     freezeTableName: true,
   }
 );
+
+// References
+agent.belongsTo(poste, {
+  foreignKey: "poste_id",
+  onDelete : "CASCADE",
+  onUpdate : "CASCADE"
+});
 
 export default agent;
