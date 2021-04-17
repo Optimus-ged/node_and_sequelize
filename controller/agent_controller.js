@@ -34,6 +34,7 @@ const agentController = {
       where: {
         id: _id,
       },
+      include : poste
     }).catch((err) => {
       console.error(err);
     });
