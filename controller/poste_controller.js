@@ -17,12 +17,7 @@ const posteController = {
       include: agent,
     }).catch((err) => {
       console.error(err);
-      res.status(500).json({
-        status: 500,
-        error: {
-          message: err.message,
-        },
-      });
+      
     });
     if (response) {
       return res.status(200).json({
@@ -35,13 +30,27 @@ const posteController = {
   },
 
   // Handling get-request for one agent
-  // getOnePoste: async (req, res) => {
-  //   console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
-  //   res.status(200).json({
-  //     status: 200,
-  //     message: "Success getted",
-  //   });
-  // },
+  getOnePoste: async (req, res) => {
+    let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+    let _response = await Poste.findOne({ where: _id }).catch((err) => {
+      console.error(err);
+    });
+    
+    if(!_response){
+      return res.status(404).json({
+        status : 404,
+        error : {
+          message : "Poste not found"
+        }
+      });
+    }
+
+    return res.status(200).json({
+      status : 200,
+      message : "Poste getted successfully",
+      response : _response
+    });
+  },
 };
 
 export default posteController;

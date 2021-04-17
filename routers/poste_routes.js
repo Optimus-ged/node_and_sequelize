@@ -5,6 +5,6 @@ const router = express.Router();
 
 router
   .get("/", posteController.getPostes)
-  // .get("/:id", posteController.getOnePoste);
+  .get("/:id", posteController.getOnePoste);
 
 export default router;
