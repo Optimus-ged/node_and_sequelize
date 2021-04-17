@@ -41,13 +41,13 @@ const agentController = {
       return res.status(404).json({
         status: 404,
         error: {
-          message: "User not found",
+          message: "Agent not found",
         },
       });
     }
     return res.status(200).json({
       status: 200,
-      message: "User getted successfully",
+      message: "Agent getted successfully",
       response: response,
     });
   },
