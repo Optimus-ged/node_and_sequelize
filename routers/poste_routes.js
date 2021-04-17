@@ -3,6 +3,8 @@ import posteController from "../controller/poste_controller";
 import express from "express";
 const router = express.Router();
 
-router.use("/", posteController.getPostes);
+router
+  .get("/", posteController.getPostes)
+  // .get("/:id", posteController.getOnePoste);
 
 export default router;

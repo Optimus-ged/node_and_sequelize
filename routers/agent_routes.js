@@ -3,6 +3,8 @@ import agentController from "../controller/agent_controller";
 
 const router = express.Router();
 
-router.use("/", agentController.getAgents);
+router
+  .get("/", agentController.getAgents)
+  .get("/:id", agentController.getOneAgent);
 
 export default router;

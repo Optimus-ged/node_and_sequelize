@@ -33,6 +33,15 @@ const posteController = {
       });
     }
   },
+
+  // Handling get-request for one agent
+  // getOnePoste: async (req, res) => {
+  //   console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+  //   res.status(200).json({
+  //     status: 200,
+  //     message: "Success getted",
+  //   });
+  // },
 };
 
 export default posteController;
