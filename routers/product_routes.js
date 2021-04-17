@@ -9,10 +9,10 @@ const router = express.Router();
 
 // All product routers
 router
-    .get('/', checkAuth, productController.getProducts)
-    .get('/:id', checkAuth, productController.getOneProduit)
+    .get('/all', checkAuth, productController.getProducts)
+    .get('/one/:id', checkAuth, productController.getOneProduit)
     .post('/many', checkAuth, productController.addProducts)
-    .post('/', checkAuth, productvalidation.validatedProduct, productController.addProduct)
+    .post('/one', checkAuth, productvalidation.validatedProduct, productController.addProduct)
     .put('/:id', checkAuth, productvalidation.validatedProduct, productController.updateProduct)
     .delete('/:id', checkAuth, productController.deleteProduct)
 

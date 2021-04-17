@@ -4,7 +4,7 @@ import express from "express";
 const router = express.Router();
 
 router
-  .get("/", posteController.getPostes)
-  .get("/:id", posteController.getOnePoste);
+  .get("/all", posteController.getPostes)
+  .get("/one/:id", posteController.getOnePoste);
 
 export default router;
