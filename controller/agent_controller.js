@@ -7,11 +7,11 @@ const agentController = {
   // Handling get all agents endpoint
   getAgents: async (req, res) => {
     let response = await Agent.findAll({
-      where: {
-        id: {
-          [Op.gt]: 1,
-        },
-      },
+      // where: {
+      //   id: {
+      //     [Op.gt]: 1,
+      //   },
+      // },
       include: poste,
     }).catch((err) => {
       console.error(err);
@@ -30,15 +30,15 @@ const agentController = {
   // Handling get one agent end-point
   getOneAgent: async (req, res) => {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let response = await Agent.findOne({
+    let _response = await Agent.findOne({
       where: {
         id: _id,
       },
-      include : poste
+      include: poste,
     }).catch((err) => {
       console.error(err);
     });
-    if (!response) {
+    if (!_response) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -49,7 +49,7 @@ const agentController = {
     return res.status(200).json({
       status: 200,
       message: "Agent getted successfully",
-      response: response,
+      response: _response,
     });
   },
 };

@@ -5,26 +5,26 @@ import { Op } from "sequelize";
 const posteController = {
   // Handling get-request for all postes
   getPostes: async (req, res) => {
-    let response = await Poste.findAll({
-      where: {
-        id: {
-          [Op.and]: {
-            [Op.eq]: 1,
-            [Op.gt]: 0,
-          },
-        },
-      },
+    let _response = await Poste.findAll({
+      // where: {
+      //   id: {
+      //     [Op.and]: {
+      //       [Op.eq]: 1,
+      //       [Op.gt]: 0,
+      //     },
+      //   },
+      // },
       include: agent,
     }).catch((err) => {
       console.error(err);
       
     });
-    if (response) {
+    if (_response) {
       return res.status(200).json({
         status: 200,
         message: "All postes getted successfully",
-        length: response.length,
-        response: response,
+        length: _response.length,
+        postes: _response,
       });
     }
   },
