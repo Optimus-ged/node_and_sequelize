@@ -18,7 +18,9 @@ export default async (req, res, next) => {
   } catch (err) {
     res.status(409).json({
       status: 409,
-      message: "Authentification failed",
+      error: {
+        message: "Authentification failed",
+      },
     });
   }
 };

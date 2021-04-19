@@ -6,7 +6,7 @@ import { Op } from "sequelize";
 const agentController = {
   // Handling get all agents endpoint
   getAgents: async (req, res) => {
-    let response = await Agent.findAll({
+    let _response = await Agent.findAll({
       // where: {
       //   id: {
       //     [Op.gt]: 1,
@@ -17,12 +17,12 @@ const agentController = {
       console.error(err);
     });
 
-    if (response) {
+    if (_response) {
       return res.status(200).json({
         status: 200,
         message: "All agents getted successfully",
-        length: response.length,
-        response: response,
+        length: _response.length,
+        response: _response,
       });
     }
   },

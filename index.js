@@ -1,7 +1,7 @@
 // Importing dependancies
 import express from "express";
-import database from "./config/database";
-import allRoutes from "./routers/principle/routers_index";
+import database from "./src/config/database";
+import allRoutes from "./src/routes/principle/routers_index";
 import dotenv from "dotenv";
 
 // Config dotenv
