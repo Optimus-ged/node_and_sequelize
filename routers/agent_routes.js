@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .get("/all", agentController.getAgents)
-  .get("/one/:id", agentController.getOneAgent);
+  .get("/one/:id", agentController.getOneAgent)
+  .get("/name/:name", agentController.getAgentByName);
 
 export default router;

@@ -52,5 +52,4 @@ poste.hasMany(agent,{
 });
 
 
-
 export default agent;

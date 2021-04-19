@@ -52,6 +52,29 @@ const agentController = {
       response: _response,
     });
   },
+
+  // Handling get request for agent by name
+  getAgentByName : async(req, res)=>{
+    let _response = await Agent.findOne({
+      where : { nom : req.params.name},
+      include: poste
+    })
+    .catch(err => console.error(err));
+    if(!_response){
+      return res.status(200).json({
+        status : 404,
+        error : {
+          message : "Agent not found"
+        }
+      });
+    }
+
+    res.status(200).json({
+      status : 200,
+      message : "User getted successfully",
+      response : _response
+    });
+  },
 };
 
 export default agentController;
