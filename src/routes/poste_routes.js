@@ -1,10 +1,13 @@
 // Importing modules and dependnacies
-import posteController from "../controller/poste_controller";
 import express from "express";
+import checkAuth from "../middleware/token";
+import posteController from "../controller/poste_controller";
+
 const router = express.Router();
 
 router
-  .get("/all", posteController.getPostes)
-  .get("/one/:id", posteController.getOnePoste);
+  .get("/", checkAuth, posteController.getPostes)
+  .get("/:id", checkAuth, posteController.getOnePoste)
+  .get("/poste_by_desi/:desi", checkAuth, posteController.getPostByName);
 
 export default router;

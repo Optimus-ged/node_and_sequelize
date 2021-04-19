@@ -1,6 +1,7 @@
 import Poste from "../models/poste_model";
 import agent from "../models/agent_model";
 import { Op } from "sequelize";
+import { response } from "express";
 
 const posteController = {
   // Handling get-request for all postes
@@ -17,7 +18,6 @@ const posteController = {
       include: agent,
     }).catch((err) => {
       console.error(err);
-      
     });
     if (_response) {
       return res.status(200).json({
@@ -35,20 +35,44 @@ const posteController = {
     let _response = await Poste.findOne({ where: _id }).catch((err) => {
       console.error(err);
     });
-    
-    if(!_response){
+
+    if (!_response) {
       return res.status(404).json({
-        status : 404,
-        error : {
-          message : "Poste not found"
-        }
+        status: 404,
+        error: {
+          message: "Poste not found",
+        },
       });
     }
 
     return res.status(200).json({
-      status : 200,
-      message : "Poste getted successfully",
-      response : _response
+      status: 200,
+      message: "Poste getted successfully",
+      response: _response,
+    });
+  },
+
+  // Handling get request for post by designation
+  getPostByName: async (req, res) => {
+    let _response = await Poste
+      .findOne({
+        where: { designation : req.params.desi },
+      })
+      .catch((err) => console.error(err));
+
+    if (!_response) {
+      return res.status(404).json({
+        status: 404,
+        error: {
+          message: "This post doesn't exist",
+        },
+      });
+    }
+
+    res.status(200).json({
+      status: 200,
+      message: "Poste successfully getted",
+      response: _response,
     });
   },
 };
