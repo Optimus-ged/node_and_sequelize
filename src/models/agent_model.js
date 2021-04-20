@@ -31,6 +31,10 @@ const agent = database.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    photo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
@@ -45,11 +49,10 @@ agent.belongsTo(poste, {
   onUpdate: "CASCADE",
 });
 
-poste.hasMany(agent,{
-    foreignKey : "poste_id",
-    onDelete : "CASCADE",
-    onUpdate : "CASCADE"
+poste.hasMany(agent, {
+  foreignKey: "poste_id",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
-
 
 export default agent;
