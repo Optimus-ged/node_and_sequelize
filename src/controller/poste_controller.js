@@ -1,7 +1,6 @@
 import Poste from "../models/poste_model";
 import agent from "../models/agent_model";
 import { Op } from "sequelize";
-import { response } from "express";
 
 const posteController = {
   // Handling get-request for all postes
@@ -57,8 +56,7 @@ const posteController = {
     let _response = await Poste
       .findOne({
         where: { designation : req.params.desi },
-      })
-      .catch((err) => console.error(err));
+      }).catch((err) => console.error(err));
 
     if (!_response) {
       return res.status(404).json({

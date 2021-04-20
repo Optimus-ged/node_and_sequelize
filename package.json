@@ -2,10 +2,10 @@
   "name": "node_with_sequelize",
   "version": "1.0.0",
   "description": "my first app with node using relational database",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node index"
+    "start": "nodemon --exec babel-node src/index"
   },
   "author": "Optimus-ged",
   "license": "ISC",
