@@ -76,7 +76,7 @@ const agentController = {
   },
 
   // Handling post request for one agent
-  
+  addAgent: async (req, res) => {},
 };
 
 export default agentController;

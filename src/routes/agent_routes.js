@@ -6,6 +6,7 @@ const router = express.Router();
 router
   .get("/", checkAuth, agentController.getAgents)
   .get("/:id", checkAuth, agentController.getOneAgent)
-  .get("/agent_by_name/:name", checkAuth, agentController.getAgentByName);
+  .get("/agent_by_name/:name", checkAuth, agentController.getAgentByName)
+  .post("/add", checkAuth, agentController.addAgent);
 
 export default router;
