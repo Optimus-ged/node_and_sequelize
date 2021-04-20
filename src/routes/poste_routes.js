@@ -9,6 +9,6 @@ router
   .get("/", checkAuth, posteController.getPostes)
   .get("/:id", checkAuth, posteController.getOnePoste)
   .get("/poste_by_desi/:desi", checkAuth, posteController.getPostByName)
-  .post("/add", checkAuth, posteController.addPost);
+  .post("/add", checkAuth, posteController.addPoste);
 
 export default router;

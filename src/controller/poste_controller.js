@@ -73,39 +73,33 @@ const posteController = {
     });
   },
 
-  // Handling post-request for one post at once
-  addPost: async (req, res) => {
+  // Handling post request for one poste agent at once
+  addPoste: async (req, res) => {
     let _designation = req.body.designation;
     let _dataExist = await Poste.findOne({
       where: {
-        designation: req.body.designation,
+        designation: _designation,
       },
-    });
+    }).catch((err) => console.error(err));
+
     if (_dataExist) {
       return res.status(409).json({
         status: 409,
         error: {
-          message: "This Poste designation does already exist",
+          message: "This poste agent does already exist",
         },
       });
     }
+
     let _response = await Poste.create({
       designation: _designation,
-    }).catch((err) => console.error(_response));
-
-    if (!_response) {
-      return res.status(200).json({
-        status: 400,
-        error: {
-          message: "Bad request",
-        },
-      });
-    }
+    }).catch((err) => console.error(err));
 
     res.status(201).json({
       status: 201,
-      message: "Poste agent created successfully",
+      message: "Poste created successfully",
       response: {
+        id: _response.id,
         designation: _response.designation,
       },
     });
