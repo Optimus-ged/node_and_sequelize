@@ -1,6 +1,6 @@
 // Importing dependancies and other modules
 import Agent from "../models/agent_model";
-import poste from "../models/poste_model";
+import Poste from "../models/poste_model";
 import { Op } from "sequelize";
 
 const agentController = {
@@ -12,7 +12,7 @@ const agentController = {
       //     [Op.gt]: 1,
       //   },
       // },
-      include: poste,
+      include: Poste,
     }).catch((err) => {
       console.error(err);
     });
@@ -34,7 +34,7 @@ const agentController = {
       where: {
         id: _id,
       },
-      include: poste,
+      include: Poste,
     }).catch((err) => {
       console.error(err);
     });
@@ -57,7 +57,7 @@ const agentController = {
   getAgentByName: async (req, res) => {
     let _response = await Agent.findOne({
       where: { nom: req.params.name },
-      include: poste,
+      include: Poste,
     }).catch((err) => console.error(err));
     if (!_response) {
       return res.status(200).json({
@@ -76,7 +76,58 @@ const agentController = {
   },
 
   // Handling post request for one agent
-  addAgent: async (req, res) => {},
+  addAgent: async (req, res) => {
+    let _body = req.body;
+    let _posteExist = await Poste.findOne({
+      where: {
+        designation: _body.designation,
+      },
+    });
+
+    if(!_posteExist){
+      return res.status(404).json({
+        status: 404,
+        error: {
+          message: "This poste agent doesn't exist",
+        },
+      });
+    }
+
+    let _data = await Agent.create({
+      nom: _body.nom,
+      prenom: _body.prenom,
+      postnom: _body.postnom,
+      sexe: _body.sexe,
+      date_naissance : _body.date_naissance,
+      poste_id : _posteExist.id,
+      photo : _body.photo
+    }).catch(err => console.error(err));
+
+   
+
+    if(!_data){
+      return res.status(404).json({
+        status : 404,
+        error : {
+          message : "Agent not created"
+        }
+      });
+    }
+
+    res.status(201).json({
+      status: 201,
+      message: "Agent created successfully",
+      response: {
+        nom: _data.nom,
+        prenom: _data.prenom,
+        postnom: _data.postnom,
+        sexe: _data.sexe,
+        date_naissance: _data.date_naissance,
+        poste: _posteExist.designation,
+        photo: _data.photo,
+      },
+    });
+  },
 };
 
 export default agentController;
