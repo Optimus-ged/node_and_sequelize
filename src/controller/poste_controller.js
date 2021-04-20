@@ -53,10 +53,9 @@ const posteController = {
 
   // Handling get request for post by designation
   getPostByName: async (req, res) => {
-    let _response = await Poste
-      .findOne({
-        where: { designation : req.params.desi },
-      }).catch((err) => console.error(err));
+    let _response = await Poste.findOne({
+      where: { designation: req.params.desi },
+    }).catch((err) => console.error(err));
 
     if (!_response) {
       return res.status(404).json({
@@ -71,6 +70,29 @@ const posteController = {
       status: 200,
       message: "Poste successfully getted",
       response: _response,
+    });
+  },
+
+  // Handling post-request for one post at once
+  addPost: async (req, res) => {
+    let _response = await Poste.create({
+      designation: req.body.designation,
+    }).catch((err) => console.error(_response));
+
+    if (!_response) {
+      return res.status(200).json({
+        status: 400,
+        error: {
+          message: "Bad request",
+        },
+      });
+    }
+
+    res.status(201).json({
+      status: 201,
+      response: {
+        designation: _response.designation,
+      },
     });
   },
 };

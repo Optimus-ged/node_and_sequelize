@@ -8,6 +8,7 @@ const router = express.Router();
 router
   .get("/", checkAuth, posteController.getPostes)
   .get("/:id", checkAuth, posteController.getOnePoste)
-  .get("/poste_by_desi/:desi", checkAuth, posteController.getPostByName);
+  .get("/poste_by_desi/:desi", checkAuth, posteController.getPostByName)
+  .post("/add", checkAuth, posteController.addPost);
 
 export default router;

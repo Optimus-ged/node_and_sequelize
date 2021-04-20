@@ -74,6 +74,9 @@ const agentController = {
       response: _response,
     });
   },
+
+  // Handling post request for one agent
+  
 };
 
 export default agentController;
