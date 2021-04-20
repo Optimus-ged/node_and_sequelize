@@ -75,8 +75,22 @@ const posteController = {
 
   // Handling post-request for one post at once
   addPost: async (req, res) => {
+    let _designation = req.body.designation;
+    let _dataExist = await Poste.findOne({
+      where: {
+        designation: req.body.designation,
+      },
+    });
+    if (_dataExist) {
+      return res.status(409).json({
+        status: 409,
+        error: {
+          message: "This Poste designation does already exist",
+        },
+      });
+    }
     let _response = await Poste.create({
-      designation: req.body.designation,
+      designation: _designation,
     }).catch((err) => console.error(_response));
 
     if (!_response) {
@@ -90,6 +104,7 @@ const posteController = {
 
     res.status(201).json({
       status: 201,
+      message: "Poste agent created successfully",
       response: {
         designation: _response.designation,
       },
