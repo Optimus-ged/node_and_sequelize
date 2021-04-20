@@ -78,13 +78,14 @@ const agentController = {
   // Handling post request for one agent
   addAgent: async (req, res) => {
     let _body = req.body;
+
     let _posteExist = await Poste.findOne({
       where: {
         designation: _body.designation,
       },
     });
 
-    if(!_posteExist){
+    if (!_posteExist) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -93,24 +94,26 @@ const agentController = {
       });
     }
 
-    let _data = await Agent.create({
+    let createData = {
       nom: _body.nom,
       prenom: _body.prenom,
       postnom: _body.postnom,
       sexe: _body.sexe,
-      date_naissance : _body.date_naissance,
-      poste_id : _posteExist.id,
-      photo : _body.photo
-    }).catch(err => console.error(err));
+      date_naissance: _body.date_naissance,
+      poste_id: _posteExist.id,
+      photo: _body.photo,
+    };
 
-   
+    let _data = await Agent.create(createData).catch((err) =>
+      console.error(err)
+    );
 
-    if(!_data){
+    if (!_data) {
       return res.status(404).json({
-        status : 404,
-        error : {
-          message : "Agent not created"
-        }
+        status: 404,
+        error: {
+          message: "Agent not created",
+        },
       });
     }
 
