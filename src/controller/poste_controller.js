@@ -5,7 +5,7 @@ import { Op } from "sequelize";
 const posteController = {
   // Handling get-request for all postes
   getPostes: async (req, res) => {
-    let _response = await Poste.findAll({
+    let response = await Poste.findAll({
       // where: {
       //   id: {
       //     [Op.and]: {
@@ -18,24 +18,24 @@ const posteController = {
     }).catch((err) => {
       console.error(err);
     });
-    if (_response) {
+    if (response) {
       return res.status(200).json({
         status: 200,
         message: "All postes getted successfully",
-        length: _response.length,
-        postes: _response,
+        length: response.length,
+        postes: response,
       });
     }
   },
 
   // Handling get-request for one agent
   getOnePoste: async (req, res) => {
-    let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let _response = await Poste.findOne({ where: _id }).catch((err) => {
+    let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+    let response = await Poste.findOne({ where: _id }).catch((err) => {
       console.error(err);
     });
 
-    if (!_response) {
+    if (!response) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -47,17 +47,17 @@ const posteController = {
     return res.status(200).json({
       status: 200,
       message: "Poste getted successfully",
-      response: _response,
+      response: response,
     });
   },
 
   // Handling get request for post by designation
   getPostByName: async (req, res) => {
-    let _response = await Poste.findOne({
+    let response = await Poste.findOne({
       where: { designation: req.params.desi },
     }).catch((err) => console.error(err));
 
-    if (!_response) {
+    if (!response) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -69,20 +69,20 @@ const posteController = {
     res.status(200).json({
       status: 200,
       message: "Poste successfully getted",
-      response: _response,
+      response: response,
     });
   },
 
   // Handling post request for one poste agent at once
   addPoste: async (req, res) => {
-    let _designation = req.body.designation;
-    let _response = await Poste.findOne({
+    let designation = req.body.designation;
+    let response = await Poste.findOne({
       where: {
-        designation: _designation,
+        designation: designation,
       },
     }).catch((err) => console.error(err));
 
-    if (_response) {
+    if (response) {
       return res.status(409).json({
         status: 409,
         error: {
@@ -91,16 +91,16 @@ const posteController = {
       });
     }
 
-    let _data = await Poste.create({
-      designation: _designation,
+    let data = await Poste.create({
+      designation: designation,
     }).catch((err) => console.error(err));
 
     res.status(201).json({
       status: 201,
       message: "Poste created successfully",
       response: {
-        id: _data.id,
-        designation: _data.designation,
+        id: data.id,
+        designation: data.designation,
       },
     });
   },
