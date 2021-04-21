@@ -6,7 +6,7 @@ import { Op } from "sequelize";
 const agentController = {
   // Handling get all agents endpoint
   getAgents: async (req, res) => {
-    let _response = await Agent.findAll({
+    let response = await Agent.findAll({
       // where: {
       //   id: {
       //     [Op.gt]: 1,
@@ -17,28 +17,28 @@ const agentController = {
       console.error(err);
     });
 
-    if (_response) {
+    if (response) {
       return res.status(200).json({
         status: 200,
         message: "All agents getted successfully",
-        length: _response.length,
-        response: _response,
+        length: response.length,
+        response: response,
       });
     }
   },
 
   // Handling get one agent end-point
   getOneAgent: async (req, res) => {
-    let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let _response = await Agent.findOne({
+    let id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
+    let response = await Agent.findOne({
       where: {
-        id: _id,
+        id: id,
       },
       include: Poste,
     }).catch((err) => {
       console.error(err);
     });
-    if (!_response) {
+    if (!response) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -49,17 +49,17 @@ const agentController = {
     return res.status(200).json({
       status: 200,
       message: "Agent getted successfully",
-      response: _response,
+      response: response,
     });
   },
 
   // Handling get request for agent by name
   getAgentByName: async (req, res) => {
-    let _response = await Agent.findOne({
+    let response = await Agent.findOne({
       where: { nom: req.params.name },
       include: Poste,
     }).catch((err) => console.error(err));
-    if (!_response) {
+    if (!response) {
       return res.status(200).json({
         status: 404,
         error: {
@@ -71,21 +71,21 @@ const agentController = {
     res.status(200).json({
       status: 200,
       message: "User getted successfully",
-      response: _response,
+      response: response,
     });
   },
 
   // Handling post request for one agent
   addAgent: async (req, res) => {
-    let _body = req.body;
+    let body = req.body;
 
-    let _posteExist = await Poste.findOne({
+    let posteExist = await Poste.findOne({
       where: {
-        designation: _body.designation,
+        designation: body.designation,
       },
     });
 
-    if (!_posteExist) {
+    if (!posteExist) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -95,20 +95,20 @@ const agentController = {
     }
 
     let createData = {
-      nom: _body.nom,
-      prenom: _body.prenom,
-      postnom: _body.postnom,
-      sexe: _body.sexe,
-      date_naissance: _body.date_naissance,
-      poste_id: _posteExist.id,
-      photo: _body.photo,
+      nom: body.nom,
+      prenom: body.prenom,
+      postnom: body.postnom,
+      sexe: body.sexe,
+      date_naissance: body.date_naissance,
+      poste_id: posteExist.id,
+      photo: body.photo,
     };
 
-    let _data = await Agent.create(createData).catch((err) =>
+    let data = await Agent.create(createData).catch((err) =>
       console.error(err)
     );
 
-    if (!_data) {
+    if (!data) {
       return res.status(404).json({
         status: 404,
         error: {
@@ -120,15 +120,6 @@ const agentController = {
     res.status(201).json({
       status: 201,
       message: "Agent created successfully",
-      response: {
-        nom: _data.nom,
-        prenom: _data.prenom,
-        postnom: _data.postnom,
-        sexe: _data.sexe,
-        date_naissance: _data.date_naissance,
-        poste: _posteExist.designation,
-        photo: _data.photo,
-      },
     });
   },
 };
