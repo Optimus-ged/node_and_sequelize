@@ -69,6 +69,10 @@ const productController = {
     let data = req.body;
     let response = [];
 
+    // data.forEach((el) => {
+    //   console.log(er);
+    // });
+
     for (let i = 0; i < data.length; i++) {
       response.push(
         await Product.create({
@@ -78,13 +82,20 @@ const productController = {
       );
     }
 
-    if (response.length > 0) {
-      res.status(201).json({
-        status: 201,
-        message: "All products success created",
-        response: response,
+    if (!response.length > 0) {
+      return res.status(400).json({
+        status: 400,
+        error: {
+          message: "Products not found",
+        },
       });
     }
+
+    res.status(201).json({
+      status: 201,
+      message: "All products success created",
+      response: response,
+    });
   },
 
   // Update a product
