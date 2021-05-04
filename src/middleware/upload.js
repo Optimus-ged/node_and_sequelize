@@ -5,7 +5,10 @@ import multer from "multer";
 // extensions
 // cb => means call back function
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+  if (
+    file.mimetype === "public/images/jpeg" ||
+    file.mimetype === "public/images/PNG"
+  ) {
     cb(null, true);
   } else {
     cb(null, false);
@@ -30,6 +33,7 @@ const upload = multer({
     fileSize: 1024 * 1024 * 5,
   },
   fileFilter: fileFilter,
+  
 });
 
 export default upload;

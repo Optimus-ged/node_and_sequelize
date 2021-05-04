@@ -81,7 +81,7 @@ const agentController = {
 
     let posteExist = await Poste.findOne({
       where: {
-        designation: body.designation,
+        designation: body.poste,
       },
     });
 
@@ -101,7 +101,7 @@ const agentController = {
       sexe: body.sexe,
       date_naissance: body.date_naissance,
       poste_id: posteExist.id,
-      photo: body.photo,
+      photo: req.file.path,
     };
 
     let data = await Agent.create(createData).catch((err) =>
