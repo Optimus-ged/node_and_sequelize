@@ -3,6 +3,7 @@ import express from "express";
 import database from "./config/database";
 import allRoutes from "./routes/principle/routers_index";
 import dotenv from "dotenv";
+import path from 'path';
 
 // Config dotenv
 dotenv.config();
