@@ -1,5 +1,5 @@
 // Import depedndancies
-import Sequelize from "sequelize";
+import { DataTypes } from "sequelize";
 import database from "../config/database";
 
 // defining user model
@@ -7,11 +7,11 @@ const user = database.define(
   "user",
   {
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },

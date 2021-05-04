@@ -1,5 +1,5 @@
 // Import dependencies
-import Sequelize from "sequelize";
+import { DataTypes } from "sequelize";
 import database from "../config/database";
 
 // profuct model
@@ -7,11 +7,11 @@ const product = database.define(
   "product",
   {
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     price: {
-      type: Sequelize.FLOAT,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
   },
