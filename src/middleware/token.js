@@ -1,13 +1,10 @@
-// Comment
 // Import dependencies
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-// Comment
 // Config dotenv
 dotenv.config();
 
-// Comment
 // Handling token
 export default async (req, res, next) => {
   try {

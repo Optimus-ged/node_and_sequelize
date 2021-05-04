@@ -1,8 +1,6 @@
-// Comment
 // Importing dependencies
 import Joi from "joi";
 
-// Comment
 // Product validation with joi dependency
 const productvalidation = {
   validatedProduct: async (req, res, next) => {
@@ -22,6 +20,5 @@ const productvalidation = {
   },
 };
 
-// Comment
 // Exporting modules
 export default productvalidation;

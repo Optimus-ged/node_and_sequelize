@@ -1,8 +1,6 @@
-// Comment
 // Importing dependencies
 import Joi from "joi";
 
-// Comment
 // user validation
 const userValidation = {
   userValidate: async (req, res, next) => {
@@ -21,6 +19,5 @@ const userValidation = {
   },
 };
 
-// Comment
 // Exporting module
 export default userValidation;
