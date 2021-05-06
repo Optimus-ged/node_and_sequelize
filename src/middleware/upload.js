@@ -17,15 +17,15 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     let dt = new Date();
-    let fileName = `${dt.getFullYear()}-${dt.getUTCMonth() + 1}-${dt.getUTCDate()} ${
-      file.originalname
-    }`;
+    let fileName = `${dt.getFullYear()}-${
+      dt.getUTCMonth() + 1
+    }-${dt.getUTCDate()} ${file.originalname}`;
     cb(null, fileName);
   },
 });
 
 // Defining file zize limits
-const fileSize = { fileSize: 1024 * 1024 * 5 };
+const fileSize = { fileSize: 1024 ** 2 * 5 };
 
 // Now uploading the image
 const upload = multer({
