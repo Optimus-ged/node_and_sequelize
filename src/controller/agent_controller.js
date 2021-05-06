@@ -1,7 +1,7 @@
 // Importing dependancies and other modules
 import Agent from "../models/agent_model";
 import Poste from "../models/poste_model";
-import { Op } from "sequelize";
+// import { Op } from "sequelize";
 
 const agentController = {
   // Handling get all agents endpoint
@@ -77,6 +77,7 @@ const agentController = {
 
   // Handling post request for one agent
   addAgent: async (req, res) => {
+    console.log("TTTTTTTTTTTT" + req.file);
     let body = req.body;
 
     let posteExist = await Poste.findOne({

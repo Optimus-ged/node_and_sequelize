@@ -6,3 +6,11 @@ DB_DIALECT = ""
 PORT = ""
 JWT_KEY = ""
 EXPIRE_TOKEN = ""
+
+// OTHERS
+let imgdest = "src/public/images";
+let dest = fs.existsSync(imgdest)
+? imgdest
+: fs.mkdir(imgdest, (e) => {
+    if (e) throw e;
+  });
