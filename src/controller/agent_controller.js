@@ -77,7 +77,8 @@ const agentController = {
 
   // Handling post request for one agent
   addAgent: async (req, res) => {
-    console.log("TTTTTTTTTTTT" + req.file);
+    let splited = req.file.path.split("\\");
+    let image = `${splited[2]}/${splited[3]}`;
     let body = req.body;
 
     let posteExist = await Poste.findOne({
@@ -102,7 +103,7 @@ const agentController = {
       sexe: body.sexe,
       date_naissance: body.date_naissance,
       poste_id: posteExist.id,
-      photo: req.file.path,
+      photo: image,
     };
 
     let data = await Agent.create(createData).catch((err) =>

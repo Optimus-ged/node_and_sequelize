@@ -1,6 +1,6 @@
 // Importing dependancy
 import multer from "multer";
-import fs from "fs";
+
 // function to filter my images, accept or reject some images
 // extensions
 // cb => means call back function
@@ -15,10 +15,19 @@ const fileFilter = (req, file, cb) => {
 // Definition of the storage : destination and fileName
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    // let imgdest = "src/public/images";
+    // let dest = fs.existsSync(imgdest)
+    //   ? imgdest
+    //   : fs.mkdir(imgdest, (e) => {
+    //       if (e) throw e;
+    //     });
     cb(null, "src/public/images");
   },
   filename: (req, file, cb) => {
-    let newName = `${Date().getFullYear()}${file.originalname}`;
+    let dt = new Date();
+    let newName = `${dt.getUTCFullYear()}-${dt.getUTCMonth() + 1}-${dt.getUTCDate()} ${
+      file.originalname
+    }`;
     cb(null, newName);
   },
 });
