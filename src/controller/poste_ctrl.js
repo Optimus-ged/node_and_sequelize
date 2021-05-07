@@ -1,5 +1,5 @@
-import Poste from "../models/poste_model";
-import agent from "../models/agent_model";
+import Poste from "../models/poste_mdl";
+import agent from "../models/agent_mdl";
 import { Op } from "sequelize";
 
 const posteController = {

@@ -1,6 +1,6 @@
 // Importing dependencies
 import express from "express";
-import userCtrl from "../controller/user_controller";
+import userCtrl from "../controller/user_ctrl";
 import checkAuth from "../middleware/token";
 import userValidation from "../middleware/user_validate";
 
@@ -16,5 +16,5 @@ router
   .put("/:id", checkAuth, userCtrl.updateUser)
   .delete("/:id", checkAuth, userCtrl.deleteUser);
 
-  // Exporting module
+// Exporting module
 export default router;

@@ -1,6 +1,6 @@
 import express from "express";
 import checkAuth from "../middleware/token";
-import agentCtrl from "../controller/agent_controller";
+import agentCtrl from "../controller/agent_ctrl";
 import uploadFile from "../middleware/upload";
 
 const router = express.Router();

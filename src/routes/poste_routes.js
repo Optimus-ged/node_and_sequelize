@@ -1,7 +1,7 @@
 // Importing modules and dependnacies
 import express from "express";
 import checkAuth from "../middleware/token";
-import posteCtrl from "../controller/poste_controller";
+import posteCtrl from "../controller/poste_ctrl";
 
 const router = express.Router();
 

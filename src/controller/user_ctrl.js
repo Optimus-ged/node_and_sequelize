@@ -1,5 +1,5 @@
 // Importing dependencies
-import User from "../models/user_model";
+import User from "../models/user_mdl";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";

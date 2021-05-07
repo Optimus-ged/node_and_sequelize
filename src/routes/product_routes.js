@@ -1,6 +1,6 @@
 // Import dependencies
 import express from "express";
-import productCtrl from "../controller/product_controller";
+import productCtrl from "../controller/product_ctrl";
 import checkAuth from "../middleware/token";
 import productValidation from "../middleware/product_validate";
 
