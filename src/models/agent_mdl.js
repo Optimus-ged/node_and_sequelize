@@ -1,7 +1,7 @@
 // Importing depedancies and other modules
 import { DataTypes } from "sequelize";
 import database from "../config/database";
-import poste from "../models/poste_model";
+import poste from "./poste_mdl";
 
 // Building agent model
 const agent = database.define(
