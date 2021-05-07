@@ -1,7 +1,7 @@
 // Import dependancies
 import express from "express";
 import articleCtrl from "../controller/article_ctrl";
-const router = express.router();
+const router = express.Router();
 
 router.get("/", articleCtrl.getAgents);
 
