@@ -3,7 +3,7 @@ import Agent from "../models/agent_mdl";
 import Poste from "../models/poste_mdl";
 // import { Op } from "sequelize";
 
-const agentController = {
+const agentCtrl = {
   // Handling get all agents endpoint
   getAgents: async (req, res) => {
     let response = await Agent.findAll({
@@ -126,4 +126,4 @@ const agentController = {
   },
 };
 
-export default agentController;
+export default agentCtrl;
