@@ -16,7 +16,7 @@ router
   .use("/postes", postesRoutes)
   .use("/agents", agentRoutes)
   .use("/article", articleRoutes)
-  .use("/photoArt", photoArtRoutes);
+  .use("/art_photo", photoArtRoutes);
 
   // Exporting module
 export default router;

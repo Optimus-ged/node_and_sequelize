@@ -5,7 +5,9 @@ import Article from "../models/article_mdl";
 const photoArtCtrl = {
   // Getting all article photos
   getPhotosArt: async (req, res) => {
-    let response = await PhotoArt.findAll().catch((err) => console.error(err));
+    let response = await PhotoArt.findAll().catch((err) =>
+      console.error(err)
+    );
     if (response) {
       return res.status(200).json({
         status: 200,
