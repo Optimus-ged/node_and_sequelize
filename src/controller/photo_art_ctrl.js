@@ -33,7 +33,7 @@ const photoArtCtrl = {
     }
 
     let data = {
-      photoArticle: req.file.path,
+      photo_article: req.file.path,
       id_article: artExist.id,
     };
 
