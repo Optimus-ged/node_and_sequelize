@@ -17,11 +17,14 @@ const photoArtCtrl = {
 
   // Handling post request
   addPhotoArt: async (req, res) => {
+    let splited = req.file.path.split("\\");
+    let image = `${splited[2]}/${splited[3]}`;
+
     let artExist = await Article.findOne({
-      whre: {
+      where: {
         designation: req.body.designation,
       },
-    });
+    }).catch((err) => console.error(err));
 
     if (!artExist) {
       return res.status(404).json({
@@ -33,7 +36,7 @@ const photoArtCtrl = {
     }
 
     let data = {
-      photo_article: req.file.path,
+      photo_article: image,
       id_article: artExist.id,
     };
 
