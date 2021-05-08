@@ -37,14 +37,11 @@ const photoArtCtrl = {
       });
     }
 
-    let data = {
+    let response = await PhotoArt.create({
       photo_article: image,
       id_article: artExist.id,
-    };
+    }).catch((err) => console.error(err));
 
-    let response = await PhotoArt.create(data).catch((err) =>
-      console.error(err)
-    );
     if (!response) {
       return res.status(400).json({
         status: 400,
