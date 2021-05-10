@@ -48,6 +48,8 @@ const userController = {
 
   // Add user sign up
   signup: async (req, res) => {
+    let splited = req.file.path.split("\\");
+    let image = `${splited[2]}/${splited[3]}`;
     let userExist = await User.findOne({
       where: {
         nom: req.body.nom,
@@ -67,14 +69,9 @@ const userController = {
         nom: req.body.nom,
         contact: req.body.contact,
         mot_de_passe: cryptedPwd,
+        photo: image,
       }).catch((err) => {
         console.log(err);
-        res.status(500).json({
-          error: {
-            status: 500,
-            message: err.message,
-          },
-        });
       });
 
       if (response) {
@@ -85,6 +82,9 @@ const userController = {
         });
       }
     }
+     res.json({
+       photo: image,
+     });
   },
 
   // Login User
@@ -100,7 +100,10 @@ const userController = {
       });
     }
 
-    let verified = await bcrypt.compare(req.body.mot_de_passe, response.mot_de_passe);
+    let verified = await bcrypt.compare(
+      req.body.mot_de_passe,
+      response.mot_de_passe
+    );
     if (!verified) {
       return res.status(500).json({
         status: 500,
@@ -153,22 +156,22 @@ const userController = {
   },
 
   // Delete a product
-  deleteUser : async (req, res)=>{
+  deleteUser: async (req, res) => {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
-    let response = await User.findOne({where : {id : _id}});
-    if(!response){
+    let response = await User.findOne({ where: { id: _id } });
+    if (!response) {
       res.status(404).json({
-        status : 400,
-        message : "Id does not Exist"
-      })
-    }else{
-      await User.destroy({where : {id : _id}});
+        status: 400,
+        message: "Id does not Exist",
+      });
+    } else {
+      await User.destroy({ where: { id: _id } });
       res.status(200).json({
-        status : 200,
-        message : "Success deleted"
+        status: 200,
+        message: "Success deleted",
       });
     }
-  }
+  },
 };
 
 // Exporting module
