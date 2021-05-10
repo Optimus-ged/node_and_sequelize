@@ -6,11 +6,15 @@ import database from "../config/database";
 const user = database.define(
   "user",
   {
-    email: {
+    nom: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    contact: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    mot_de_passe: {
       type: DataTypes.STRING,
       allowNull: false,
     },

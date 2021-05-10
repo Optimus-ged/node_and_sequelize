@@ -48,23 +48,25 @@ const userController = {
 
   // Add user sign up
   signup: async (req, res) => {
-    let emailExist = await User.findOne({
+    let userExist = await User.findOne({
       where: {
-        email: req.body.email,
+        nom: req.body.nom,
+        contact: req.body.contact,
       },
     });
-    if (emailExist) {
+    if (userExist) {
       return res.status(500).json({
         error: {
           status: 500,
-          message: "The email you are using is already used",
+          message: "L'utilisateur existe deja",
         },
       });
     } else {
-      let cryptedPwd = await bcrypt.hash(req.body.password, 10);
+      let cryptedPwd = await bcrypt.hash(req.body.mot_de_passe, 10);
       let response = await User.create({
-        email: req.body.email,
-        password: cryptedPwd,
+        nom: req.body.nom,
+        contact: req.body.contact,
+        mot_de_passe: cryptedPwd,
       }).catch((err) => {
         console.log(err);
         res.status(500).json({
@@ -88,17 +90,17 @@ const userController = {
   // Login User
   loginUser: async (req, res) => {
     let response = await User.findOne({
-      where: { email: req.body.email },
+      where: { nom: req.body.nom },
     }).catch((err) => console.error(err));
 
     if (!response) {
       return res.status(404).json({
         status: 404,
-        message: "Authentification failed please check your email",
+        message: "Authentification failed please check your name",
       });
     }
 
-    let verified = await bcrypt.compare(req.body.password, response.password);
+    let verified = await bcrypt.compare(req.body.mot_de_passe, response.mot_de_passe);
     if (!verified) {
       return res.status(500).json({
         status: 500,
@@ -109,7 +111,7 @@ const userController = {
     }
 
     let token = jwt.sign(
-      { email: req.body.email, id: response.id },
+      { nom: req.body.nom, id: response.id },
       process.env.JWT_KEY,
       { expiresIn: process.env.EXPIRE_TOKEN }
     );
@@ -133,7 +135,7 @@ const userController = {
     }
     if (response) {
       let updated = await User.update(
-        { email: req.body.email },
+        { nom: req.body.nom },
         { where: { id: _id } }
       );
       if (updated[0] != 0) {

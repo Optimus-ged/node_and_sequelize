@@ -69,10 +69,6 @@ const productController = {
     let data = req.body;
     let response = [];
 
-    // data.forEach((el) => {
-    //   console.log(er);
-    // });
-
     for (let i = 0; i < data.length; i++) {
       response.push(
         await Product.create({
