@@ -2,11 +2,13 @@
 import Joi from "joi";
 
 // user validation
-const userValidation = {
+const signupValidation = {
   userValidate: async (req, res, next) => {
     let schema = Joi.object({
       nom: Joi.string().min(5).required(),
       mot_de_passe: Joi.string().min(5).required(),
+      contact: Joi.string().min(15).required(),
+      photo: Joi.string().max(100).required(),
     });
     let { error } = schema.validate(req.body);
     if (error) {
@@ -20,4 +22,4 @@ const userValidation = {
 };
 
 // Exporting module
-export default userValidation;
+export default signupValidation;

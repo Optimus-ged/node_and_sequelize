@@ -64,7 +64,6 @@ const userController = {
         },
       });
     } else {
-      console.log(image + "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ " + image.length);
       let cryptedPwd = await bcrypt.hash(req.body.mot_de_passe, 10);
       let response = await User.create({
         nom: req.body.nom,
@@ -83,9 +82,6 @@ const userController = {
         });
       }
     }
-    res.json({
-      photo: image,
-    });
   },
 
   // Login User
