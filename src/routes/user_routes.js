@@ -15,8 +15,8 @@ router
   .post("/login", userValidation.validateUser, userCtrl.loginUser)
   .post(
     "/signup",
-    userValidation.validateUser,
     uploadFile.single("photo"),
+    userValidation.validateUser,
     userCtrl.signup
   )
   .put("/:id", userValidation.validateUser, checkAuth, userCtrl.updateUser)

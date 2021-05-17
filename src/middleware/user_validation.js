@@ -7,8 +7,7 @@ const userValidation = {
     let schema = Joi.object({
       nom: Joi.string().min(5).required(),
       mot_de_passe: Joi.string().min(5).required(),
-      contact: Joi.string().min(15).required(),
-      photo: Joi.string().max(100).required(),
+      contact: Joi.string().min(10).max(15).required(),
     });
     let { error } = schema.validate(req.body);
     if (error) {
