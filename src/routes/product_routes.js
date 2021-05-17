@@ -2,7 +2,7 @@
 import express from "express";
 import productCtrl from "../controller/product_ctrl";
 import checkAuth from "../middleware/token";
-import productValidation from "../middleware/product_validate";
+import productValidation from "../middleware/product_validation";
 
 // declaring the rooter
 const router = express.Router();
