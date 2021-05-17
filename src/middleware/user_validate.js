@@ -5,8 +5,8 @@ import Joi from "joi";
 const userValidation = {
   userValidate: async (req, res, next) => {
     let schema = Joi.object({
-      email: Joi.string().min(5).required(),
-      password: Joi.string().min(5).required(),
+      nom: Joi.string().min(5).required(),
+      mot_de_passe: Joi.string().min(5).required(),
     });
     let { error } = schema.validate(req.body);
     if (error) {

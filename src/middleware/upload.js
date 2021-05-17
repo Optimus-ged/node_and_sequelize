@@ -17,9 +17,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     let dt = new Date();
-    let fileName = `${dt.getFullYear()}-${
-      dt.getUTCMonth() + 1
-    }-${dt.getUTCDate()} ${file.originalname}`;
+    let fileName = `${dt.getTime()}_${file.originalname}`;
     cb(null, fileName);
   },
 });

@@ -82,9 +82,9 @@ const userController = {
         });
       }
     }
-     res.json({
-       photo: image,
-     });
+    res.json({
+      photo: image,
+    });
   },
 
   // Login User

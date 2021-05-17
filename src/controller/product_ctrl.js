@@ -1,5 +1,5 @@
 // Import dependencies
-import Product from "../models/poste_mdl";
+import Product from "../models/product_mdl";
 
 // The product controller
 const productController = {

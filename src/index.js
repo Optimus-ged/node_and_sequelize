@@ -26,13 +26,13 @@ const testConnection = async () => {
 };
 testConnection();
 
+// Defining static folder
+app.use(express.static(path.join(__dirname, "public")));
+
 // Config all routes middleware
 app.use("/api", allRoutes);
 
-// Defining static folder
-app.use(express.static(path.join(__dirname, "src/public")));
-
-// Catching all unknown endpoints
+// // Catching all unknown endpoints
 app.use("**", (req, res) => {
   res.status(404).json({
     status: 404,
