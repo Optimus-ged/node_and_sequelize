@@ -64,12 +64,13 @@ const userController = {
         },
       });
     } else {
+      console.log(image + "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ " + image.length);
       let cryptedPwd = await bcrypt.hash(req.body.mot_de_passe, 10);
       let response = await User.create({
         nom: req.body.nom,
         contact: req.body.contact,
         mot_de_passe: cryptedPwd,
-        photo: image,
+        photo: image
       }).catch((err) => {
         console.log(err);
       });
