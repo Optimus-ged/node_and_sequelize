@@ -34,8 +34,8 @@ app.use("/api", allRoutes);
 
 // // Catching all unknown endpoints
 app.use("**", (req, res) => {
-  res.status(404).json({
-    status: 404,
+  res.status(405).json({
+    status: 405,
     error: {
       message: "Request was not found on the Server",
     },

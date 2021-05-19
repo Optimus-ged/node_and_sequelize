@@ -12,7 +12,7 @@ const router = express.Router();
 router
   .get("/all", checkAuth, userCtrl.getUsers)
   .get("/one/:id", checkAuth, userCtrl.getOneUser)
-  .post("/login", userValidation.validateUser, userCtrl.loginUser)
+  .post("/login",  userCtrl.loginUser)
   .post(
     "/signup",
     userValidation.validateUser,

@@ -9,6 +9,6 @@ router
   .get("/", checkAuth, agentCtrl.getAgents)
   .get("/:id", checkAuth, agentCtrl.getOneAgent)
   .get("/agent_by_name/:name", checkAuth, agentCtrl.getAgentByName)
-  .post("/add", checkAuth, uploadFile.single("photo"), agentCtrl.addAgent);
+  .post("/add",  uploadFile.single("photo"), agentCtrl.addAgent);
 
 export default router;
