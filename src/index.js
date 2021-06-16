@@ -7,6 +7,7 @@ import path from "path";
 
 // Config dotenv
 dotenv.config();
+
 // Declaring constants
 const port = process.env.PORT || 3000;
 const app = express();
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Connection to the database
-const testConnection = async () => {
+const testConnection = () => {
   try {
     database.authenticate();
     console.log("The conection to the database is OK !!!");
