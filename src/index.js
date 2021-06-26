@@ -57,11 +57,11 @@
 import express from "express";
 const app = express();
 
-app.use(auth);
+app.use(routes);
 
-app.get("/", (req, res) => {
+app.get("/", auth, (req, res) => {
   console.log("Home page");
-  res.send("Welcome on Optimus home page");
+  res.send("Welcome page");
 });
 
 app.get("/user", (req, res) => {
@@ -70,8 +70,17 @@ app.get("/user", (req, res) => {
 });
 
 function auth(req, res, next) {
-  console.log("Authentification function");
-  // next();
+  if (req.query.admin === "true") {
+    console.log("Is logged in");
+    next();
+    return;
+  }
+  res.send("Authentification failed");
+}
+
+function routes(req, res, next) {
+  console.log("All the routes");
+  next();
 }
 
 app.listen(3000, () => console.log("Server is up at port 3000"));
