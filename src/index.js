@@ -54,11 +54,24 @@
 // // Listening to the port
 // app.listen(port, () => console.log(`The Server is running at port ${port}`));
 
-import express from 'express';
+import express from "express";
 const app = express();
 
-app.get('/', async (req, res)=>{
-  res.send('Welcome on Optimus home page')
+app.use(auth);
+
+app.get("/", (req, res) => {
+  console.log("Home page");
+  res.send("Welcome on Optimus home page");
 });
 
-app.listen(3000, ()=> console.log('Server is up at port 3000'));
+app.get("/user", (req, res) => {
+  console.log("User page");
+  res.send("User page");
+});
+
+function auth(req, res, next) {
+  console.log("Authentification function");
+  // next();
+}
+
+app.listen(3000, () => console.log("Server is up at port 3000"));
