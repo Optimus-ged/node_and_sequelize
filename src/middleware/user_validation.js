@@ -3,7 +3,7 @@ import Joi from "joi";
 
 // user validation
 const userValidation = {
-  validateUser: async (req, res, next) => {
+  validateUser: (req, res, next) => {
     let schema = Joi.object({
       nom: Joi.string().min(5).required(),
       mot_de_passe: Joi.string().min(5).required(),
