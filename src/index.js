@@ -1,5 +1,6 @@
 // Importing dependancies
 import express from "express";
+import cors from "cors";
 import database from "./config/database";
 import allRoutes from "./routes/principle/routers_index";
 import dotenv from "dotenv";
@@ -15,6 +16,7 @@ const app = express();
 // Defining middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Connection to the database
 const testConnection = () => {
