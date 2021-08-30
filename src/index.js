@@ -5,6 +5,7 @@ import database from "./config/database";
 import allRoutes from "./routes/principle/routers_index";
 import dotenv from "dotenv";
 import path from "path";
+import morgan from "morgan";
 
 // Config dotenv
 dotenv.config();
@@ -14,6 +15,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // Defining middlewares
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -27,6 +29,7 @@ const testConnection = () => {
     console.error(error);
   }
 };
+
 testConnection();
 
 // Defining static folder

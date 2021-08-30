@@ -112,7 +112,7 @@ const productController = {
         },
         { where: { id: _id } }
       );
-      if (updated[0] != 0) {
+      if (updated[0] !== 0) {
         res.status(200).json({
           status: 200,
           message: "Product updated succesfully",
