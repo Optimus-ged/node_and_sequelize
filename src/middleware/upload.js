@@ -3,7 +3,12 @@ import multer from "multer";
 
 // Filtering image
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === "image/png" || file.mimetype === "image/jpeg") {
+  console.log(file);
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "application/octet-stream"
+  ) {
     cb(null, true);
   } else {
     cb(null, false);

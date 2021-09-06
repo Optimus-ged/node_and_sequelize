@@ -48,8 +48,10 @@ const userController = {
 
   // Add user sign up
   signup: async (req, res) => {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     let splited = req.file.path.split("\\");
     let image = `${splited[2]}/${splited[3]}`;
+    
     let userExist = await User.findOne({
       where: {
         nom: req.body.nom,
@@ -57,24 +59,23 @@ const userController = {
       },
     });
     if (userExist) {
-      return res.status(500).json({
-        error: {
-          status: 500,
-          message: "L'utilisateur existe deja",
-        },
+      return res.status(200).json({
+        status: 500,
+        message: "L'utilisateur existe deja",
       });
     } else {
+      
       let cryptedPwd = await bcrypt.hash(req.body.mot_de_passe, 10);
       let response = await User.create({
         nom: req.body.nom,
         contact: req.body.contact,
         mot_de_passe: cryptedPwd,
-        photo: image
+        photo: image,
       }).catch((err) => {
         console.log(err);
         res.status(400).json({
           status: 400,
-          message: err.message
+          message: err.message,
         });
       });
 
@@ -95,7 +96,7 @@ const userController = {
     }).catch((err) => console.error(err));
 
     if (!response) {
-      return res.status(404).json({
+      return res.status(200).json({
         status: 404,
         message: "Authentification failed please check your name",
       });
@@ -106,11 +107,9 @@ const userController = {
       response.mot_de_passe
     );
     if (!verified) {
-      return res.status(500).json({
-        status: 500,
-        error: {
-          message: "Authentification failed",
-        },
+      return res.status(200).json({
+        status: 404,
+        message: "Authentification failed",
       });
     }
 
@@ -124,6 +123,7 @@ const userController = {
       status: 200,
       message: "Authentification success",
       token: token,
+      user: response,
     });
   },
 
@@ -132,7 +132,7 @@ const userController = {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
     let response = await User.findOne({ where: { id: _id } });
     if (!response) {
-      res.status(404).json({
+      res.status(200).json({
         status: 404,
         message: "User not found",
       });
@@ -148,7 +148,7 @@ const userController = {
           message: "User Updated Successfully",
         });
       } else {
-        res.status(500).json({
+        res.status(200).json({
           status: 500,
           message: "User Not updated",
         });
@@ -161,7 +161,7 @@ const userController = {
     let _id = isNaN(parseInt(req.params.id)) ? 0 : parseInt(req.params.id);
     let response = await User.findOne({ where: { id: _id } });
     if (!response) {
-      res.status(404).json({
+      res.status(200).json({
         status: 400,
         message: "Id does not Exist",
       });

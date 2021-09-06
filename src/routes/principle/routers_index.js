@@ -18,5 +18,5 @@ router
   .use("/article", articleRoutes)
   .use("/art_photo", photoArtRoutes);
 
-  // Exporting module
+// Exporting module
 export default router;
